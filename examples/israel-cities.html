@@ -1,0 +1,272 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Israel Cities Map</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700&family=Frank+Ruhl+Libre:wght@500;700&family=Suez+One&display=swap">
+<style>
+/* Layout: a cartographer's sheet. Tall main map on the left, Gush Dan inset and city card on the right, city index below. */
+:root{
+  --bg:#f3f4f0; --paper:#fffefb; --ink:#1c2430; --muted:#5d6670; --line:#d9dcd4;
+  --sea:#d5e5ec; --sea-ink:#5f8296;
+  --land:#f1e4c8; --land-edge:#b79f73;
+  --other:#e7e4dc; --other-edge:#c3beb2;
+  --pal:#ece6d8;
+  --accent:#1f4fa0; --accent-soft:#dfe8f7; --dot:#2b3442; --halo:#fffefb;
+  --f-display:"Suez One","Frank Ruhl Libre",Georgia,serif;
+  --f-body:"Assistant","Segoe UI",system-ui,sans-serif;
+  --f-heb:"Frank Ruhl Libre","Times New Roman",serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0e1418; --paper:#151d23; --ink:#e8ebe6; --muted:#9aa5ad; --line:#2a353d;
+  --sea:#14283a; --sea-ink:#7fa3bd;
+  --land:#463c2b; --land-edge:#9c8559;
+  --other:#252b30; --other-edge:#3d464d; --pal:#2f3330;
+  --accent:#8db2f2; --accent-soft:#1d2d47; --dot:#e8ebe6; --halo:#151d23; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0e1418; --paper:#151d23; --ink:#e8ebe6; --muted:#9aa5ad; --line:#2a353d;
+  --sea:#14283a; --sea-ink:#7fa3bd;
+  --land:#463c2b; --land-edge:#9c8559;
+  --other:#252b30; --other-edge:#3d464d; --pal:#2f3330;
+  --accent:#8db2f2; --accent-soft:#1d2d47; --dot:#e8ebe6; --halo:#151d23; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-block:28px 48px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:22px}
+header{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:8px 24px;border-bottom:2px solid var(--ink);padding-bottom:14px}
+h1{font-family:var(--f-display);font-weight:400;font-size:clamp(30px,5vw,46px);line-height:1.05;margin:0;text-wrap:balance}
+.heb-title{font-family:var(--f-heb);font-weight:700;font-size:clamp(24px,3.6vw,34px);direction:rtl;margin:0;color:var(--accent)}
+.lede{margin:0;color:var(--muted);max-width:60ch}
+.stage{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:22px;align-items:start}
+.panel{background:var(--paper);border:1px solid var(--line);border-radius:6px;min-width:0}
+.panel-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:10px 14px;border-bottom:1px solid var(--line);font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.panel-head .h{font-family:var(--f-heb);letter-spacing:0;text-transform:none;font-size:16px;color:var(--ink)}
+.right{display:flex;flex-direction:column;gap:22px;min-width:0}
+svg{display:block;width:100%;height:auto}
+.sea{fill:var(--sea)}
+.c-other{fill:var(--other);stroke:var(--other-edge);stroke-width:.8;vector-effect:non-scaling-stroke}
+.c-pal{fill:var(--pal);stroke:var(--other-edge);stroke-width:1;stroke-dasharray:3 2.5;vector-effect:non-scaling-stroke}
+.c-il{fill:var(--land);stroke:var(--land-edge);stroke-width:1.1;vector-effect:non-scaling-stroke}
+.lake{fill:var(--sea);stroke:var(--sea-ink);stroke-width:.5;vector-effect:non-scaling-stroke}
+.region{font-family:var(--f-body);fill:var(--muted);font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+.water{font-family:var(--f-body);fill:var(--sea-ink);font-style:italic;font-weight:600}
+.box{fill:none;stroke:var(--accent);stroke-width:1.5;stroke-dasharray:4 3}
+.city{cursor:pointer;outline:none}
+.city .hit{fill:transparent}
+.city .pt{fill:var(--dot);stroke:var(--halo);stroke-width:1.5}
+.city .ring{fill:none;stroke:var(--accent);stroke-width:2;opacity:0}
+.city .en{font-family:var(--f-body);font-weight:700;fill:var(--ink);paint-order:stroke;stroke:var(--halo);stroke-width:3.5px;stroke-linejoin:round}
+.city .he{font-family:var(--f-heb);font-weight:500;fill:var(--muted);paint-order:stroke;stroke:var(--halo);stroke-width:3.5px;stroke-linejoin:round}
+.city .lead{stroke:var(--muted);stroke-width:.8;fill:none;opacity:.7}
+.city:hover .en,.city:focus-visible .en{fill:var(--accent)}
+.city.sel .pt{fill:var(--accent)}
+.city.sel .ring{opacity:1}
+.city.sel .en{fill:var(--accent)}
+.city.sel .he{fill:var(--accent)}
+.city.sel .lead{stroke:var(--accent);opacity:1;stroke-width:1.4}
+.city:focus-visible .ring{opacity:1;stroke-dasharray:3 2}
+.note{padding:8px 14px;font-size:12px;color:var(--muted);border-top:1px solid var(--line)}
+.card{padding:18px 20px 20px;display:flex;flex-direction:column;gap:10px}
+.card-top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:4px 16px}
+.card h2{margin:0;font-family:var(--f-display);font-weight:400;font-size:30px;line-height:1.1}
+.card .heb{font-family:var(--f-heb);font-weight:700;font-size:32px;direction:rtl;color:var(--accent);line-height:1.2}
+.tag{align-self:flex-start;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);background:var(--accent-soft);padding:3px 9px;border-radius:3px}
+.fact{margin:0;max-width:62ch;font-size:17px}
+.src{margin:0;font-size:14px;color:var(--muted)}
+.src b{color:var(--ink);font-weight:600}
+.index h3{margin:0 0 10px;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.chips{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:8px}
+.chip{font:inherit;color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:5px;padding:7px 10px;text-align:left;cursor:pointer;display:flex;justify-content:space-between;align-items:baseline;gap:8px;min-width:0}
+.chip span{font-weight:600;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chip i{font-style:normal;font-family:var(--f-heb);color:var(--muted);font-size:15px;direction:rtl;white-space:nowrap}
+.chip:hover{border-color:var(--accent)}
+.chip:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+.chip[aria-pressed="true"] i{color:var(--paper)}
+@media (max-width:780px){.stage{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:no-preference){.city .ring{transition:opacity .15s}.chip{transition:background .15s,border-color .15s}}
+</style>
+
+<div class="wrap">
+  <header>
+    <div>
+      <h1>Israel Cities Map</h1>
+      <p class="lede">The 20 cities from our word search. Tap any dot or name to learn about that city.</p>
+    </div>
+    <p class="heb-title">עָרֵי יִשְׂרָאֵל</p>
+  </header>
+
+  <div class="stage">
+    <section class="panel" aria-label="Map of Israel">
+      <div class="panel-head"><span>Israel</span><span class="h">יִשְׂרָאֵל</span></div>
+      <svg id="main" role="group" aria-label="Map of Israel with cities"></svg>
+      <div class="note">Dashed blue box: the Tel Aviv area, shown up close on the right.</div>
+    </section>
+    <div class="right">
+      <section class="panel" aria-label="Close-up of the Tel Aviv area">
+        <div class="panel-head"><span>Close-up: Tel Aviv area</span><span class="h">גּוּשׁ דָּן</span></div>
+        <svg id="inset" role="group" aria-label="Close-up map of the Tel Aviv area"></svg>
+      </section>
+      <section class="panel card" aria-live="polite" id="card"></section>
+    </div>
+  </div>
+
+  <section class="index">
+    <h3>All 20 cities</h3>
+    <div class="chips" id="chips"></div>
+  </section>
+</div>
+
+<script>
+const SHAPES = {"Israel": "M161.7,477.7L173.2,468.6L179.2,462.1L179.7,458.7L178.3,451.9L178.3,448.5L182.0,441.4L201.3,422.9L214.2,412.0L201.4,403.4L202.8,399.9L207.0,394.6L223.3,366.9L237.6,334.7L240.8,329.7L246.1,312.0L246.1,307.9L248.5,306.7L262.2,263.9L273.6,207.9L274.5,205.9L275.5,197.0L276.4,194.4L276.1,191.4L280.0,175.1L280.9,157.2L282.3,153.1L284.9,151.7L287.0,152.2L290.5,154.5L294.6,154.7L300.6,148.3L303.5,138.8L303.2,136.4L301.1,135.4L302.1,132.4L303.3,120.2L305.6,113.8L306.3,109.9L305.6,106.5L308.1,103.8L306.9,102.5L321.5,103.2L325.2,101.0L329.9,101.8L336.2,99.8L338.3,99.8L342.0,102.1L346.5,108.6L348.8,108.9L358.4,106.4L366.5,103.0L371.8,102.5L372.6,99.5L377.3,90.5L378.2,85.4L378.6,75.6L379.9,71.1L383.6,63.8L385.6,63.6L389.7,69.6L392.9,72.0L393.0,71.1L395.3,68.8L395.6,66.1L397.5,65.1L401.1,64.7L402.5,62.1L409.0,55.5L416.7,53.8L421.1,51.5L423.9,48.4L427.3,41.7L429.9,38.7L430.1,39.7L429.2,41.0L428.0,48.0L423.9,51.4L420.2,53.1L426.7,57.5L421.0,65.5L422.2,67.0L426.9,70.3L427.6,79.7L431.5,82.0L432.0,87.8L428.3,94.6L428.3,97.6L434.7,100.3L434.1,102.9L436.4,122.0L437.3,124.5L441.3,131.0L438.9,135.5L437.7,135.8L434.8,140.8L432.8,146.8L433.5,149.3L432.2,154.4L423.6,164.4L419.1,171.1L416.1,171.9L406.7,177.8L401.1,182.8L398.4,184.2L394.2,183.6L391.2,185.9L388.6,189.3L385.5,191.8L385.4,193.5L386.1,194.9L387.5,195.8L387.5,197.0L386.4,197.0L386.4,198.5L387.3,200.3L387.8,205.4L388.8,207.9L387.8,209.1L387.5,207.9L386.4,210.8L385.3,209.4L386.4,214.9L384.0,214.9L384.0,216.2L385.6,216.2L388.8,220.5L388.8,221.7L387.3,222.2L386.2,223.2L385.3,225.9L387.5,227.2L387.5,228.7L385.3,229.9L386.4,231.3L384.0,232.8L385.0,233.2L385.3,234.1L384.0,234.1L384.0,235.4L385.2,237.2L382.9,238.1L383.6,240.3L385.6,243.1L367.8,238.5L363.7,238.3L359.3,237.0L358.3,232.0L358.4,225.8L356.9,221.1L351.8,218.0L346.7,217.4L336.0,217.9L332.9,216.8L328.0,212.8L325.5,211.5L322.4,211.7L320.0,213.5L315.8,218.4L305.4,224.2L300.9,227.4L297.5,233.2L293.6,251.1L290.0,252.9L289.3,255.4L288.2,264.3L290.3,265.0L291.5,266.5L291.8,268.6L291.2,271.1L289.9,273.6L283.3,279.7L282.8,282.7L287.7,295.2L287.2,302.1L291.1,315.8L289.3,317.8L289.5,324.2L287.6,326.6L291.2,331.0L290.5,332.2L290.8,333.2L292.7,334.7L295.0,335.1L296.5,338.3L295.8,347.8L295.0,348.6L289.6,349.2L286.0,353.3L290.2,354.3L292.1,354.1L294.6,353.5L299.5,349.3L302.9,349.2L304.9,350.4L306.5,353.7L309.1,355.2L310.6,355.0L313.3,357.1L319.6,358.5L321.6,358.3L321.0,356.0L321.2,355.0L323.4,354.7L326.3,356.2L326.7,356.0L326.8,352.2L324.8,345.8L324.9,344.5L326.1,343.7L327.8,344.2L328.5,346.6L328.7,349.9L329.7,351.5L332.5,351.1L333.8,352.3L332.8,353.7L335.1,354.7L333.5,357.6L334.7,362.1L333.0,366.1L333.1,367.5L334.2,368.6L334.7,370.3L333.0,372.4L332.4,375.3L331.6,376.1L331.2,377.8L330.5,378.1L328.1,376.2L327.3,377.0L324.9,375.4L320.5,376.0L318.3,373.6L316.2,373.3L315.3,372.5L311.3,373.4L309.4,376.5L300.0,384.6L285.4,393.9L282.3,397.6L279.2,403.6L277.4,421.1L269.7,434.0L267.2,440.7L269.2,447.4L273.0,450.3L277.5,451.0L282.2,450.3L286.5,448.8L296.7,447.4L318.0,447.5L328.0,443.8L346.6,428.2L356.4,422.6L368.1,421.7L367.8,435.3L367.1,439.8L364.1,447.9L360.9,453.6L362.2,455.1L361.9,459.4L357.4,468.5L358.3,473.9L359.9,479.1L364.3,488.1L365.5,493.6L364.7,499.3L356.7,515.2L355.6,521.1L355.6,527.3L353.7,531.0L347.0,537.5L344.8,542.0L343.9,555.4L342.9,557.3L338.7,561.5L337.6,564.0L334.9,576.0L324.9,596.6L317.5,621.1L316.7,625.8L313.8,634.0L313.8,638.8L317.1,644.9L317.5,647.7L317.2,650.5L314.1,657.2L312.5,667.6L311.3,671.1L311.2,676.8L314.7,689.0L314.7,695.3L311.9,702.1L304.6,713.2L302.6,721.1L302.5,723.5L300.4,728.5L299.1,735.3L299.0,747.5L298.2,751.5L290.3,773.4L289.1,778.4L288.2,789.6L286.5,794.6L284.3,798.4L281.6,810.9L276.2,818.5L274.7,822.0L270.6,822.0L265.2,810.9L264.0,806.1L264.3,792.2L259.9,771.7L245.8,732.0L244.4,717.5L221.6,651.1L219.7,648.2L210.4,640.0L209.2,638.1L208.9,635.8L209.2,632.3L210.8,626.3L210.8,623.6L206.4,617.3L205.4,613.9L205.0,605.7L201.3,589.8L175.6,521.1L161.7,477.7Z", "Palestine": "M201.4,403.4L214.2,412.0L201.3,422.9L182.0,441.4L178.3,448.5L178.3,451.9L179.7,458.7L179.2,462.1L173.2,468.6L161.7,477.7L157.7,464.9L153.5,457.1L157.3,454.7L159.7,451.5L167.4,444.7L170.8,438.5L178.8,432.5L182.2,426.4L195.0,413.1L201.4,403.4ZM289.5,324.2L289.3,317.8L291.1,315.8L287.2,302.1L287.7,295.2L282.8,282.7L283.3,279.7L289.9,273.6L291.2,271.1L291.8,268.6L291.5,266.5L290.3,265.0L288.2,264.3L289.3,255.4L290.0,252.9L293.6,251.1L297.5,233.2L300.9,227.4L305.4,224.2L315.8,218.4L320.0,213.5L322.4,211.7L325.5,211.5L328.0,212.8L332.9,216.8L336.0,217.9L346.7,217.4L351.8,218.0L356.9,221.1L358.4,225.8L358.3,232.0L359.3,237.0L363.7,238.3L367.8,238.5L385.6,243.1L386.4,246.4L385.3,246.4L385.3,245.0L384.0,245.0L384.0,246.4L384.9,248.4L384.8,254.4L386.4,257.3L385.6,259.7L385.5,263.5L386.2,267.3L387.5,269.6L386.0,270.6L385.3,272.5L387.5,272.5L384.6,285.1L385.3,289.0L383.1,290.6L383.1,291.7L384.0,293.0L381.2,297.8L381.1,300.2L382.9,302.6L380.0,305.0L379.1,308.4L379.4,317.7L381.2,322.4L382.0,328.9L383.0,331.1L382.9,332.7L379.8,334.5L379.4,336.2L383.5,352.2L381.7,354.7L381.7,356.1L385.3,366.9L379.9,373.0L371.8,391.8L369.1,406.3L368.1,421.7L356.4,422.6L346.6,428.2L328.0,443.8L318.0,447.5L296.7,447.4L286.5,448.8L282.2,450.3L277.5,451.0L273.0,450.3L269.2,447.4L267.2,440.7L269.7,434.0L277.4,421.1L279.2,403.6L282.3,397.6L285.4,393.9L300.0,384.6L309.4,376.5L311.3,373.4L315.3,372.5L316.2,373.3L318.3,373.6L320.5,376.0L324.9,375.4L327.3,377.0L328.1,376.2L330.5,378.1L331.2,377.8L331.6,376.1L332.4,375.3L333.0,372.4L334.7,370.3L334.2,368.6L333.1,367.5L333.0,366.1L334.7,362.1L333.5,357.6L335.1,354.7L332.8,353.7L333.8,352.3L332.5,351.1L329.7,351.5L328.7,349.9L328.5,346.6L327.8,344.2L326.1,343.7L324.9,344.5L324.8,345.8L326.8,352.2L326.7,356.0L326.3,356.2L323.4,354.7L321.2,355.0L321.0,356.0L321.6,358.3L319.6,358.5L313.3,357.1L310.6,355.0L309.1,355.2L306.5,353.7L304.9,350.4L302.9,349.2L299.5,349.3L294.6,353.5L292.1,354.1L290.2,354.3L286.0,353.3L289.6,349.2L295.0,348.6L295.8,347.8L296.5,338.3L295.0,335.1L292.7,334.7L290.8,333.2L290.5,332.2L291.2,331.0L287.6,326.6L289.5,324.2Z", "Lebanon": "M307.8,101.9L308.1,101.0L307.0,100.9L306.9,99.7L307.9,97.5L311.3,93.5L315.1,91.9L318.5,86.0L317.5,84.6L319.1,84.7L319.7,86.0L324.8,75.0L325.6,69.1L322.0,64.0L325.7,61.3L328.2,57.6L331.4,48.9L332.6,38.1L336.8,31.0L336.1,28.5L345.0,21.8L349.4,17.2L351.7,8.7L355.0,0.0L464.8,0.0L467.0,2.7L466.4,6.4L463.8,9.5L457.1,13.2L453.1,13.2L449.0,14.4L447.1,17.1L449.4,21.1L446.7,27.5L441.4,31.9L429.9,38.7L427.3,41.7L423.9,48.4L421.1,51.5L416.7,53.8L409.0,55.5L402.5,62.1L401.1,64.7L397.5,65.1L395.6,66.1L395.3,68.8L393.0,71.1L392.9,72.0L389.7,69.6L385.6,63.6L383.6,63.8L379.9,71.1L378.6,75.6L378.2,85.4L377.3,90.5L372.6,99.5L371.8,102.5L366.5,103.0L358.4,106.4L348.8,108.9L346.5,108.6L342.0,102.1L338.3,99.8L336.2,99.8L329.9,101.8L325.2,101.0L321.5,103.2L307.8,101.9Z", "Syria": "M423.6,164.4L432.2,154.4L433.5,149.3L432.8,146.8L434.8,140.8L437.7,135.8L438.9,135.5L441.3,131.0L437.3,124.5L436.4,122.0L434.1,102.9L434.7,100.3L428.3,97.6L428.3,94.6L432.0,87.8L431.5,82.0L427.6,79.7L426.9,70.3L422.2,67.0L421.0,65.5L426.7,57.5L420.2,53.1L423.9,51.4L428.0,48.0L429.2,41.0L430.1,39.7L429.9,38.7L441.4,31.9L446.7,27.5L449.4,21.1L447.1,17.1L449.0,14.4L453.1,13.2L457.1,13.2L463.8,9.5L466.4,6.4L467.0,2.7L464.8,0.0L579.8,0.0L579.8,255.0L578.0,256.1L571.9,251.4L542.3,247.8L539.5,246.1L529.9,245.2L526.6,244.1L524.1,242.7L509.1,228.6L498.1,221.1L492.5,215.5L490.7,214.5L487.0,217.0L483.1,216.0L476.8,216.8L471.7,216.5L470.7,213.3L463.1,201.8L461.4,198.4L461.8,191.3L461.0,189.0L454.6,189.1L452.8,188.5L449.8,185.2L450.4,185.3L450.9,184.5L450.9,181.8L447.2,181.2L442.6,177.3L424.3,173.1L422.0,170.5L419.1,171.1L423.6,164.4Z", "Saudi Arabia": "M274.4,878.0L274.4,873.9L276.1,872.2L280.0,869.9L278.9,866.5L278.4,862.1L279.0,859.2L281.0,860.3L281.5,858.9L282.3,859.0L281.0,856.0L280.6,852.6L281.3,849.7L451.9,880.0L273.6,880.0L274.4,878.0ZM472.3,880.0L541.8,821.1L579.8,755.2L579.8,880.0L472.3,880.0Z", "Jordan": "M394.3,183.7L398.4,184.2L401.1,182.8L406.7,177.8L416.1,171.9L421.2,170.4L422.8,171.1L424.3,173.1L442.6,177.3L447.2,181.2L450.9,181.8L450.9,184.5L450.4,185.3L449.8,185.2L452.8,188.5L454.6,189.1L461.0,189.0L461.8,191.3L461.4,198.4L463.1,201.8L470.7,213.3L471.7,216.5L476.8,216.8L483.1,216.0L487.0,217.0L490.7,214.5L492.5,215.5L498.1,221.1L509.1,228.6L524.1,242.7L526.6,244.1L529.9,245.2L539.5,246.1L542.3,247.8L571.9,251.4L578.0,256.1L579.8,255.0L579.8,755.2L541.8,821.1L472.3,880.0L451.9,880.0L281.3,849.7L283.5,848.0L284.6,829.8L285.8,824.6L289.5,816.4L289.4,813.2L285.8,809.6L283.5,809.6L283.1,808.1L282.3,808.2L283.1,802.8L284.3,798.4L286.5,794.6L288.2,789.6L289.1,778.4L290.3,773.4L298.2,751.5L299.0,747.5L299.1,735.3L300.4,728.5L302.5,723.5L302.6,721.1L304.6,713.2L311.9,702.1L314.7,695.3L314.7,689.0L311.2,676.8L311.3,671.1L312.5,667.6L314.1,657.2L317.2,650.5L317.5,647.7L317.1,644.9L313.8,638.8L313.8,634.0L316.7,625.8L317.5,621.1L324.9,596.6L334.9,576.0L337.6,564.0L338.7,561.5L342.9,557.3L343.9,555.4L344.8,542.0L347.0,537.5L353.7,531.0L355.6,527.3L355.6,521.1L356.7,515.2L364.7,499.3L365.5,493.6L364.3,488.1L359.9,479.1L358.3,473.9L357.4,468.5L361.9,459.4L362.2,455.1L360.9,453.6L364.1,447.9L367.1,439.8L367.8,435.3L368.0,421.6L369.1,406.3L371.8,391.8L379.9,373.0L385.3,366.9L381.7,356.1L381.7,354.7L383.5,352.2L379.4,336.2L379.8,334.5L382.9,332.7L383.0,331.1L382.0,328.9L381.2,322.4L379.4,317.7L379.1,308.4L380.0,305.0L382.9,302.6L381.1,300.2L381.2,297.8L384.0,293.0L383.1,291.7L383.1,290.6L385.3,289.0L384.6,285.1L387.5,272.5L385.3,272.5L386.0,270.6L387.5,269.6L386.2,267.3L385.5,263.5L385.6,259.7L386.4,257.3L384.8,254.4L384.9,248.4L384.0,246.4L384.0,245.0L385.3,245.0L385.3,246.4L386.4,246.4L385.6,243.1L383.6,240.3L382.9,238.1L385.2,237.2L384.0,235.4L384.0,234.1L385.3,234.1L385.0,233.2L384.0,232.8L386.4,231.3L385.3,229.9L387.5,228.7L387.5,227.2L385.3,225.9L385.6,224.6L387.3,222.2L388.8,221.7L388.8,220.5L385.6,216.2L384.0,216.2L384.0,214.9L386.4,214.9L385.3,209.4L386.4,210.8L387.5,207.9L387.8,209.1L388.8,207.9L387.8,205.4L387.3,200.3L386.4,198.5L386.4,197.0L387.5,197.0L387.5,195.8L386.1,194.9L385.4,193.5L385.5,191.8L388.6,189.3L391.2,185.9L394.3,183.7Z", "Egypt": "M157.7,464.9L175.6,521.1L201.3,589.8L205.0,605.7L205.4,613.9L206.4,617.3L210.8,623.6L210.8,626.3L209.2,632.3L208.9,635.8L209.2,638.1L210.4,640.0L219.7,648.2L221.6,651.1L244.4,717.5L245.8,732.0L259.9,771.7L264.3,792.2L264.0,806.1L265.2,810.9L270.6,822.0L266.0,825.6L262.3,833.4L260.1,834.3L261.5,834.8L261.4,835.8L258.8,837.6L258.4,838.7L259.0,839.9L256.7,840.7L257.9,842.5L255.9,844.4L252.0,850.8L248.5,853.4L246.4,856.8L245.0,857.7L245.0,859.0L246.5,861.7L245.9,864.6L243.7,869.9L243.7,880.0L0.0,880.0L0.0,504.1L0.7,504.1L0.6,500.0L3.0,499.8L1.4,499.0L0.0,499.2L0.0,498.3L14.7,497.1L13.2,493.5L18.1,492.5L18.1,488.9L20.6,490.4L24.0,489.8L30.8,493.4L34.0,494.4L46.5,495.7L49.8,497.1L49.8,495.7L53.7,496.9L59.3,496.5L94.5,487.3L127.4,474.2L153.5,457.1L157.7,464.9ZM18.1,483.1L22.7,485.6L30.0,491.7L26.3,489.1L0.0,477.5L0.0,476.8L9.0,481.0L18.1,483.1Z", "LAKE:Sea of Galilee": "M399.2,147.0L398.5,153.5L399.2,155.8L398.2,161.2L398.3,163.6L399.2,165.5L398.2,166.1L398.0,169.6L392.1,176.4L388.3,176.0L387.0,172.5L386.5,168.6L383.6,166.1L381.6,161.3L378.1,155.8L379.2,149.6L384.5,143.9L390.8,140.4L394.5,140.8L398.6,145.0L399.2,147.0Z", "LAKE:Dead Sea": "M389.9,369.4L390.2,373.9L388.5,379.7L384.5,412.3L386.8,420.6L387.4,426.4L382.8,449.2L383.3,453.6L382.0,455.3L379.2,458.0L377.3,459.0L375.8,458.7L375.4,456.4L377.3,449.1L376.9,446.5L373.7,446.6L365.3,455.6L360.6,454.7L359.1,451.0L358.4,441.0L357.0,432.8L358.2,425.5L356.9,417.2L357.8,413.5L359.5,410.3L360.6,406.7L360.5,404.5L359.4,399.6L359.5,397.0L360.3,395.2L364.1,388.9L367.4,381.0L371.2,373.9L376.3,368.8L383.9,366.9L385.2,366.9L389.9,369.4ZM379.7,482.2L380.5,486.1L379.9,487.3L376.4,491.1L375.8,492.2L376.8,493.6L377.2,495.5L378.0,496.7L378.2,497.9L376.9,499.2L372.7,502.3L371.1,502.7L368.2,502.5L360.8,501.2L358.2,499.8L356.9,497.5L356.1,491.6L351.9,484.9L351.0,477.9L353.0,472.9L358.2,473.9L361.7,469.7L368.6,476.2L371.0,477.9L377.0,480.1L379.7,482.2Z"};
+const K=200, LON0=33.3, LATTOP=33.6, C=Math.cos(31.5*Math.PI/180);
+const P=(lat,lon)=>[(lon-LON0)*C*K,(LATTOP-lat)*K];
+
+const CITIES=[
+ {id:"ashdod",en:"Ashdod",he:"אַשְׁדּוֹד",lat:31.80,lon:34.65,tag:"Southern coast",fact:"One of the five Philistine cities in the Bible. Today it has one of Israel's two biggest seaports, where ships bring goods from all over the world.",src:"1 Samuel 5",srcNote:"the Ark is brought to Ashdod"},
+ {id:"ashkelon",en:"Ashkelon",he:"אַשְׁקְלוֹן",lat:31.668,lon:34.574,tag:"Southern coast",fact:"A seaside city with very old roots. Archaeologists found a city gate here with an arch built about 3,800 years ago, one of the oldest arches in the world.",src:"2 Samuel 1:20",srcNote:"David's lament mentions its streets",mainLbl:"left"},
+ {id:"batyam",en:"Bat Yam",he:"בַּת יָם",lat:32.017,lon:34.745,tag:"Central coast",fact:"Its name means \"Daughter of the Sea.\" The city sits on the beach just south of Tel Aviv-Yafo, with a long seaside promenade.",inset:"L"},
+ {id:"beersheba",en:"Beersheba",he:"בְּאֵר שֶׁבַע",lat:31.252,lon:34.791,tag:"Negev",fact:"The largest city in the Negev desert. In the Torah, Abraham digs a well here and makes a promise (shevuah) with Abimelech, which gives the place its name.",src:"Genesis 21:31",srcNote:"how Beer-sheba got its name",mainLbl:"right"},
+ {id:"beitshemesh",en:"Beit Shemesh",he:"בֵּית שֶׁמֶשׁ",lat:31.747,lon:34.988,tag:"Judean foothills",fact:"Its name means \"House of the Sun.\" In the Bible, the Ark of the Covenant arrives here on a cart pulled by two cows after the Philistines send it back.",src:"1 Samuel 6",srcNote:"the Ark returns",mainLbl:"below"},
+ {id:"bneibrak",en:"Bnei Brak",he:"בְּנֵי בְּרַק",lat:32.084,lon:34.834,tag:"Gush Dan",fact:"A crowded city known for its many yeshivot. The Passover Haggadah tells about five rabbis in Bnei Brak who spent the whole night telling the story of leaving Egypt.",src:"Joshua 19:45",srcNote:"listed in the land of the tribe of Dan",inset:"R"},
+ {id:"haifa",en:"Haifa",he:"חֵיפָה",lat:32.794,lon:34.989,tag:"Northern coast",fact:"A port city that climbs up the slopes of Mount Carmel. It is home to the Technion, Israel's oldest university, and the terraced Bahá'í Gardens.",src:"1 Kings 18",srcNote:"Elijah on Mount Carmel",mainLbl:"left"},
+ {id:"herzliya",en:"Herzliya",he:"הֶרְצְלִיָּה",lat:32.166,lon:34.843,tag:"Sharon",fact:"Named for Theodor Herzl, the father of modern political Zionism. Today many high-tech companies have offices here, close to the beach.",inset:"L"},
+ {id:"holon",en:"Holon",he:"חוֹלוֹן",lat:32.011,lon:34.774,tag:"Gush Dan",fact:"Its name comes from the Hebrew word for sand (chol), since it was built on sand dunes. It is home to the Israel Children's Museum and the Design Museum Holon.",inset:"R"},
+ {id:"jerusalem",en:"Jerusalem",he:"יְרוּשָׁלַיִם",lat:31.778,lon:35.235,tag:"Judean hills",fact:"Israel's largest city and the seat of its government. The Kotel, the Old City, and its four quarters are all here. Jews have faced toward Jerusalem in prayer for thousands of years.",src:"Psalm 122",srcNote:"a song of going up to Jerusalem",mainLbl:"right"},
+ {id:"kfarsaba",en:"Kfar Saba",he:"כְּפַר סָבָא",lat:32.178,lon:34.908,tag:"Sharon",fact:"Founded in 1903 as a farming village surrounded by orange groves. Today it is a green city in the Sharon plain, with lots of parks.",inset:"R"},
+ {id:"lod",en:"Lod",he:"לוֹד",lat:31.951,lon:34.895,tag:"Central",fact:"One of the oldest cities in the country. Ben Gurion Airport, Israel's main international airport, sits right next to Lod.",src:"Ezra 2:33",srcNote:"people of Lod return from Babylon",inset:"R"},
+ {id:"netanya",en:"Netanya",he:"נְתַנְיָה",lat:32.329,lon:34.857,tag:"Sharon",fact:"Named for Nathan Straus, an American Jewish businessman who gave money for health care in the Land of Israel. Its beaches sit below tall sandstone cliffs.",inset:"L"},
+ {id:"petahtikva",en:"Petah Tikva",he:"פֶּתַח תִּקְוָה",lat:32.087,lon:34.887,tag:"Gush Dan",fact:"Its name means \"Door of Hope.\" Founded in 1878, it is nicknamed Em HaMoshavot, \"Mother of the Settlements,\" because it was one of the first modern Jewish farming towns.",src:"Hosea 2:17",srcNote:"source of the name",inset:"R"},
+ {id:"raanana",en:"Ra'anana",he:"רַעֲנָנָה",lat:32.184,lon:34.871,tag:"Sharon",fact:"Its name means \"fresh\" or \"green.\" It was founded in 1922 by a group of Jews from New York, and many English speakers still live there today.",inset:"R"},
+ {id:"ramatgan",en:"Ramat Gan",he:"רָמַת גַּן",lat:32.068,lon:34.824,tag:"Gush Dan",fact:"Home of the Israel Diamond Exchange and the Ramat Gan Safari, a large open zoo where African animals roam.",inset:"R"},
+ {id:"rehovot",en:"Rehovot",he:"רְחוֹבוֹת",lat:31.894,lon:34.811,tag:"Central",fact:"Home of the Weizmann Institute of Science. The name comes from a well Isaac dug, which he called Rehovot because God had given them room.",src:"Genesis 26:22",srcNote:"source of the name",inset:"R"},
+ {id:"rishon",en:"Rishon LeZion",he:"רִאשׁוֹן לְצִיּוֹן",lat:31.964,lon:34.804,tag:"Central",fact:"Founded in 1882 as one of the first modern Jewish farming towns. Its name, \"First to Zion,\" comes from the prophet Isaiah. Israel's oldest winery opened here in 1890.",src:"Isaiah 41:27",srcNote:"source of the name",inset:"L"},
+ {id:"telaviv",en:"Tel Aviv-Yafo",he:"תֵּל אָבִיב-יָפוֹ",lat:32.085,lon:34.781,tag:"Central coast",fact:"Tel Aviv was founded in 1909 next to the ancient port of Yafo (Jaffa). Its thousands of white Bauhaus-style buildings earned it the nickname \"the White City.\"",src:"Jonah 1:3",srcNote:"Jonah sets sail from Jaffa",inset:"L"}
+];
+CITIES.find(c=>c.id==="ashdod").inset="L";
+
+const NS="http://www.w3.org/2000/svg";
+const el=(tag,attrs={},parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);if(parent)parent.appendChild(e);return e};
+function drawLand(svg,scale){
+  const g=el("g",{},svg);
+  for(const [name,d] of Object.entries(SHAPES)){
+    if(name.startsWith("LAKE:"))continue;
+    const cls=name==="Israel"?"c-il":name==="Palestine"?"c-pal":"c-other";
+    el("path",{d,class:cls},g);
+  }
+  for(const [name,d] of Object.entries(SHAPES)) if(name.startsWith("LAKE:")) el("path",{d,class:"lake"},g);
+  return g;
+}
+function text(parent,x,y,str,cls,size,anchor="start",extra={}){const t=el("text",{x,y,class:cls,"font-size":size,"text-anchor":anchor,...extra},parent);t.textContent=str;return t}
+
+const nodes={};
+function addNode(id,g){(nodes[id]=nodes[id]||[]).push(g)}
+function cityGroup(parent,c,label){
+  const g=el("g",{class:"city",tabindex:"0",role:"button","aria-label":c.en,"data-id":c.id},parent);
+  g.addEventListener("click",()=>select(c.id));
+  g.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();select(c.id)}});
+  addNode(c.id,g);return g;
+}
+
+/* ---------- main map ---------- */
+const main=document.getElementById("main");
+const VB=[95,25,395,820];
+main.setAttribute("viewBox",VB.join(" "));
+el("rect",{x:VB[0],y:VB[1],width:VB[2],height:VB[3],class:"sea"},main);
+drawLand(main);
+const R=(lat,lon,str,cls,size,extra)=>{const [x,y]=P(lat,lon);return text(main,x,y,str,cls,size,"middle",extra)};
+R(33.5,35.62,"Lebanon","region",9.5);
+R(33.05,36.0,"Syria","region",9.5);
+R(31.15,35.95,"Jordan","region",9.5);
+R(30.25,34.05,"Egypt","region",9.5);
+R(30.55,34.88,"Negev","region",9.5,{opacity:.85});
+R(32.25,35.28,"West Bank","region",7.5);
+R(31.47,34.05,"Gaza Strip","region",7.5);
+R(32.7,34.25,"Mediterranean","water",11);
+text(main,P(32.62,34.25)[0],P(32.62,34.25)[1],"Sea","water",11,"middle");
+R(31.48,35.62,"Dead Sea","water",7.5);
+R(32.84,35.86,"Sea of Galilee","water",7);
+
+// inset box
+const IB={latT:32.36,latB:31.77,lonL:34.52,lonR:35.02};
+{const [x1,y1]=P(IB.latT,IB.lonL),[x2,y2]=P(IB.latB,IB.lonR);el("rect",{x:x1,y:y1,width:x2-x1,height:y2-y1,class:"box",rx:2},main)}
+
+const mainLayer=el("g",{},main);
+for(const c of CITIES){
+  const [x,y]=P(c.lat,c.lon);
+  const g=cityGroup(mainLayer,c);
+  if(c.inset){ // small dot only, label lives in the close-up
+    el("circle",{cx:x,cy:y,r:7,class:"hit"},g);
+    el("circle",{cx:x,cy:y,r:5.5,class:"ring"},g);
+    el("circle",{cx:x,cy:y,r:2.2,class:"pt"},g);
+    continue;
+  }
+  el("circle",{cx:x,cy:y,r:14,class:"hit"},g);
+  el("circle",{cx:x,cy:y,r:8,class:"ring"},g);
+  el("circle",{cx:x,cy:y,r:3.8,class:"pt"},g);
+  let ax,ay,anc;
+  if(c.mainLbl==="left"){ax=x-8;ay=y-1;anc="end"}
+  else if(c.mainLbl==="right"){ax=x+8;ay=y-1;anc="start"}
+  else {ax=x;ay=y+17;anc="middle"}
+  text(g,ax,ay,c.en,"en",13,anc);
+  text(g,ax,ay+14,c.he,"he",12.5,anc);
+}
+
+/* ---------- inset ---------- */
+const inset=document.getElementById("inset");
+const IW=720,IH=620,S=4.7,TX=150,TY=32;
+const [ix0,iy0]=P(IB.latT,IB.lonL);
+const Q=(lat,lon)=>{const [x,y]=P(lat,lon);return [(x-ix0)*S+TX,(y-iy0)*S+TY]};
+inset.setAttribute("viewBox",`0 0 ${IW} ${IH}`);
+el("rect",{x:0,y:0,width:IW,height:IH,class:"sea"},inset);
+const landG=drawLand(inset);
+landG.setAttribute("transform",`translate(${TX - ix0*S} ${TY - iy0*S}) scale(${S})`);
+{const [x,y]=Q(32.245,34.6);text(inset,x,y,"Mediterranean Sea","water",22,"middle")}
+
+function spread(items,minGap,top,bottom){
+  items.sort((a,b)=>a.ty-b.ty);
+  for(let i=0;i<items.length;i++){items[i].ly=Math.max(items[i].ty,i?items[i-1].ly+minGap:top)}
+  if(items.length&&items[items.length-1].ly>bottom){items[items.length-1].ly=bottom;for(let i=items.length-2;i>=0;i--)items[i].ly=Math.min(items[i].ly,items[i+1].ly-minGap)}
+}
+const insetCities=CITIES.filter(c=>c.inset).map(c=>{const [x,y]=Q(c.lat,c.lon);return {c,x,y,ty:y}});
+const L=insetCities.filter(o=>o.c.inset==="L"), Rr=insetCities.filter(o=>o.c.inset==="R");
+spread(L,74,50,IH-40);spread(Rr,66,50,IH-40);
+const RX=Math.max(...Rr.map(o=>o.x))+46;
+const layer=el("g",{},inset);
+function insetCity(o,side){
+  const g=cityGroup(layer,o.c);
+  const ax=side==="L"? Math.min(o.x-40, o.x-40) : RX;
+  const tx=side==="L"? ax-6 : ax+6;
+  el("path",{d:`M${o.x},${o.y} L${side==="L"?o.x-14:o.x+14},${o.y} L${ax},${o.ly-6} `,class:"lead"},g);
+  const en=text(g,tx,o.ly,o.c.en,"en",23,side==="L"?"end":"start");
+  text(g,tx,o.ly+24,o.c.he,"he",22,side==="L"?"end":"start");
+  el("circle",{cx:o.x,cy:o.y,r:16,class:"hit"},g);
+  el("circle",{cx:o.x,cy:o.y,r:13,class:"ring"},g);
+  el("circle",{cx:o.x,cy:o.y,r:6.5,class:"pt"},g);
+}
+L.forEach(o=>insetCity(o,"L"));Rr.forEach(o=>insetCity(o,"R"));
+
+/* ---------- chips + card ---------- */
+const chips=document.getElementById("chips");
+const chipEls={};
+[...CITIES].sort((a,b)=>a.en.localeCompare(b.en)).forEach(c=>{
+  const b=document.createElement("button");b.className="chip";b.type="button";b.id="chip-"+c.id;
+  b.innerHTML=`<span></span><i lang="he"></i>`;b.querySelector("span").textContent=c.en;b.querySelector("i").textContent=c.he;
+  b.addEventListener("click",()=>select(c.id));chips.appendChild(b);chipEls[c.id]=b;
+});
+const card=document.getElementById("card");
+function select(id){
+  const c=CITIES.find(x=>x.id===id);if(!c)return;
+  Object.entries(nodes).forEach(([k,arr])=>arr.forEach(g=>{g.classList.toggle("sel",k===id);if(k===id)g.parentNode.appendChild(g)}));
+  Object.entries(chipEls).forEach(([k,b])=>b.setAttribute("aria-pressed",k===id?"true":"false"));
+  card.innerHTML=`<span class="tag"></span><div class="card-top"><h2></h2><div class="heb" lang="he"></div></div><p class="fact"></p>${c.src?'<p class="src">In the Tanakh: <b></b> <span></span></p>':""}`;
+  card.querySelector(".tag").textContent=c.tag;
+  card.querySelector("h2").textContent=c.en;
+  card.querySelector(".heb").textContent=c.he;
+  card.querySelector(".fact").textContent=c.fact;
+  if(c.src){card.querySelector(".src b").textContent=c.src;card.querySelector(".src span").textContent="("+c.srcNote+")"}
+  try{localStorage.setItem("il-city",id)}catch(e){}
+}
+let start="jerusalem";try{const s=localStorage.getItem("il-city");if(s&&CITIES.some(c=>c.id===s))start=s}catch(e){}
+select(start);
+</script>
+
+</body></html>

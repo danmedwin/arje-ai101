@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>AI 101 for Jewish Educators | Tech Rabbi</title>
+<meta name="description" content="Resources from Rabbi Dan Medwin’s AI 101 session for Jewish educators: how to start, practice steps, four concerns through Jewish values, and how to build mini-apps for your classroom.">
+<link rel="icon" href="/apps/logo.png" type="image/png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="AI 101 for Jewish Educators">
+<meta property="og:description" content="How to start, what to watch for, and how to build mini-apps for your classroom. Resources from Rabbi Dan Medwin’s session.">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&family=Frank+Ruhl+Libre:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme: light;
+  --navy:#0f1b2d; --navy-deep:#0b1422; --navy-2:#1a2d4a;
+  --gold:#d4a853; --gold-soft:#e8c97a; --gold-ink:#8a6516; --gold-wash:#f6edd6;
+  --cream:#eee8db; --paper:#f5f0e8; --white:#ffffff;
+  --slate:#9aa3b4; --ink:#0f1b2d; --ink-soft:#4b5565;
+  --brick:#9b3a2c; --brick-wash:#f8e9e4;
+  --line:rgba(255,255,255,.10); --line-ink:rgba(15,27,45,.12);
+  --serif:'Playfair Display', Georgia, 'Times New Roman', serif;
+  --sans:'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --mono:'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+  --heb:'Frank Ruhl Libre', 'David Libre', 'Times New Roman', serif;
+  --r:14px;
+  --shadow:0 6px 22px rgba(15,27,45,.06);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 19px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+a{color:var(--navy);text-decoration-color:rgba(138,101,22,.5);text-underline-offset:.18em}
+a:focus-visible,button:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid var(--gold-ink);outline-offset:3px;border-radius:6px}
+h1,h2,h3,p{margin:0}
+img{max-width:100%;height:auto;display:block}
+.wrap{max-width:760px;margin:0 auto;padding:0 16px}
+
+/* hero */
+.hero{position:relative;background:var(--navy);color:var(--cream);overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 15% 60%,rgba(212,168,83,.12) 0%,transparent 60%),radial-gradient(ellipse at 85% 15%,rgba(26,45,74,.8) 0%,transparent 55%)}
+.hero::after{content:"";position:absolute;inset:0;opacity:.035;background-image:linear-gradient(rgba(212,168,83,.6) 1px,transparent 1px),linear-gradient(90deg,rgba(212,168,83,.6) 1px,transparent 1px);background-size:48px 48px}
+.hero .wrap{position:relative;z-index:1;padding-top:44px;padding-bottom:40px}
+.eyebrow{font:500 13px/1.4 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--gold)}
+.hero h1{margin-top:14px;font:700 clamp(2.3rem,8vw,3.4rem)/1.08 var(--serif);text-wrap:balance}
+.hero h1 em{color:var(--gold);font-style:italic}
+.hero .lede{margin-top:16px;font-size:1.12rem;line-height:1.6;color:var(--cream);max-width:34em}
+.hero .event{margin-top:22px;padding-top:16px;border-top:1px solid var(--line);font:400 15px/1.5 var(--sans);color:var(--slate)}
+
+/* jump links */
+.jump{position:sticky;top:0;z-index:5;background:rgba(245,240,232,.96);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border-bottom:1px solid var(--line-ink)}
+.jump ul{list-style:none;margin:0 auto;padding:10px 12px;max-width:760px;display:flex;flex-wrap:wrap;gap:6px}
+.jump a{display:inline-block;padding:7px 12px;border-radius:999px;background:var(--white);border:1px solid var(--line-ink);font:500 15px/1.2 var(--sans);text-decoration:none;color:var(--navy)}
+
+/* sections */
+section{padding:40px 0 8px;scroll-margin-top:110px}
+[id]{scroll-margin-top:110px}
+.kicker{font:500 13px/1.4 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--gold-ink)}
+section h2{margin-top:8px;font:700 clamp(1.7rem,6vw,2.2rem)/1.15 var(--serif);color:var(--navy);text-wrap:balance}
+h2.sub{margin-top:40px}
+section > .wrap > p.intro{margin-top:10px;color:var(--ink-soft)}
+.card{margin-top:16px;background:var(--white);border:1px solid var(--line-ink);border-radius:var(--r);padding:20px 20px 18px;box-shadow:var(--shadow)}
+.card h3{font:700 1.15rem/1.3 var(--sans);color:var(--navy)}
+.card p{margin-top:6px;color:var(--ink-soft)}
+.card ul,.card ol{margin:10px 0 0;padding-left:1.25em;color:var(--ink)}
+.card li{margin:6px 0}
+.card li::marker{color:var(--gold-ink);font-weight:700}
+.card.dark{background:var(--navy);border-color:var(--navy)}
+.card.dark h3{color:var(--white)}
+.card.dark p{color:var(--cream)}
+.card.wash{background:var(--gold-wash)}
+.card.wash p{color:var(--ink)}
+.mensch{display:grid;grid-template-columns:132px minmax(0,1fr);gap:20px;align-items:start}
+.mensch img{border-radius:8px;border:1px solid var(--line-ink);background:var(--white)}
+.mensch h3{margin-top:4px;font:700 1.45rem/1.2 var(--serif)}
+
+/* steps */
+.steps{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:12px;counter-reset:s}
+.steps > li{counter-increment:s;display:grid;grid-template-columns:44px minmax(0,1fr);gap:14px;align-items:start;background:var(--white);border:1px solid var(--line-ink);border-radius:var(--r);padding:16px 18px;box-shadow:var(--shadow)}
+.steps > li::before{content:counter(s);width:44px;height:44px;border-radius:50%;background:var(--navy);color:var(--gold);display:grid;place-items:center;font:700 1.25rem/1 var(--serif)}
+.steps h3{font:700 1.1rem/1.3 var(--sans);color:var(--navy)}
+.steps p{margin-top:4px;color:var(--ink-soft)}
+.steps .notice{margin-top:12px;padding-top:10px;border-top:1px dashed var(--line-ink);color:var(--ink)}
+.steps .notice b{color:var(--gold-ink)}
+.steps .prompt{box-shadow:none;margin-top:12px;background:var(--paper)}
+
+/* prompts */
+.prompt{margin-top:14px;background:var(--white);border:1px solid var(--line-ink);border-left:6px solid var(--gold);border-radius:4px var(--r) var(--r) 4px;padding:16px 18px;box-shadow:var(--shadow)}
+.prompt .tag{font:500 12px/1.4 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--gold-ink)}
+.prompt .q{margin-top:6px;font:500 1.06rem/1.5 var(--sans);color:var(--navy)}
+.prompt .q.long{font-size:1rem;font-weight:400}
+.prompt .fill{color:var(--gold-ink);font-weight:600}
+.prompt .why{margin-top:8px;font-size:.95rem;color:var(--ink-soft)}
+.actions{margin-top:12px;display:flex;flex-wrap:wrap;gap:8px}
+.btn{appearance:none;display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:46px;padding:10px 16px;border-radius:10px;border:1px solid var(--line-ink);background:var(--paper);color:var(--navy);font:600 16px/1.2 var(--sans);text-decoration:none;cursor:pointer}
+.btn.primary{background:var(--navy);border-color:var(--navy);color:var(--cream)}
+.btn:hover{border-color:var(--gold-ink)}
+.btn.done{background:var(--gold-wash);border-color:var(--gold-ink);color:var(--navy)}
+
+/* follow-up chips */
+.chips{margin-top:12px;display:flex;flex-wrap:wrap;gap:8px}
+.chip{appearance:none;min-height:46px;padding:10px 14px;border-radius:999px;border:1px solid var(--line-ink);background:var(--white);font:500 16px/1.3 var(--sans);color:var(--navy);cursor:pointer;text-align:left}
+.chip:hover{border-color:var(--gold-ink)}
+.chip.done{background:var(--gold-wash);border-color:var(--gold-ink)}
+
+/* Hebrew */
+.he{font-family:var(--heb);direction:rtl;unicode-bidi:isolate}
+.source{margin-top:16px;background:var(--navy);color:var(--cream);border-radius:var(--r);padding:22px 20px;text-align:center}
+.source .he{display:block;font-size:clamp(1.7rem,7vw,2.3rem);font-weight:700;line-height:1.35;color:var(--gold)}
+.source .tl{margin-top:6px;font-style:italic;color:var(--cream)}
+.source .en{margin-top:10px;font:400 1.2rem/1.45 var(--serif);color:var(--white)}
+.source .ref{margin-top:10px;font:500 13px/1.4 var(--mono);letter-spacing:.08em;text-transform:uppercase}
+.source .ref a{color:var(--gold)}
+
+/* concerns */
+.concern{margin-top:20px;background:var(--white);border:1px solid var(--line-ink);border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden}
+.concern > header{background:var(--navy);color:var(--cream);padding:20px 20px 18px}
+.concern .num{font:500 12px/1.4 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--gold)}
+.concern h3{margin-top:4px;font:700 1.45rem/1.2 var(--serif);color:var(--white)}
+.concern .he{display:block;margin-top:14px;font-size:clamp(1.6rem,6.5vw,2.1rem);font-weight:700;line-height:1.35;color:var(--gold);text-align:right}
+.concern .tl{margin-top:4px;font-style:italic}
+.concern .en{margin-top:6px;font:400 1.1rem/1.45 var(--serif);color:var(--white)}
+.concern .ref{margin-top:8px;font-size:15px}
+.concern .ref a{color:var(--gold)}
+.concern dl{margin:0;padding:6px 20px 16px}
+.concern dt{margin-top:14px;font:500 12px/1.4 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--gold-ink)}
+.concern dd{margin:4px 0 0}
+.concern dd.practice{background:var(--gold-wash);margin:6px -8px 0;padding:10px 12px;border-radius:10px}
+
+/* gallery */
+.gallery{margin-top:16px;display:grid;gap:14px}
+.shot{background:var(--white);border:1px solid var(--line-ink);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column}
+.shot img{width:100%;aspect-ratio:16/10;object-fit:cover;border-bottom:1px solid var(--line-ink)}
+.shot .body{padding:14px 16px 16px;display:flex;flex-direction:column;flex:1}
+.shot h3{font:700 1.15rem/1.3 var(--serif);color:var(--navy)}
+.shot p{margin-top:4px;font-size:.98rem;color:var(--ink-soft);flex:1}
+.shot .actions{margin-top:12px}
+
+/* do / don't */
+.dd{display:grid;gap:14px;margin-top:16px}
+.dd .card{margin-top:0;padding:0;overflow:hidden}
+.dd h3{padding:10px 18px;font:600 14px/1.3 var(--mono);letter-spacing:.14em;color:var(--white)}
+.dd .do h3{background:var(--navy);color:var(--gold)}
+.dd .dont h3{background:var(--brick)}
+.dd ul{list-style:none;margin:0;padding:14px 18px 16px}
+.dd li{position:relative;padding-left:22px;margin:8px 0}
+.dd li::before{content:"";position:absolute;left:0;top:.6em;width:10px;height:10px;border-radius:50%;background:var(--gold)}
+.dd .dont li::before{background:var(--brick)}
+
+/* disclosures */
+details.tool{margin-top:12px;background:var(--white);border:1px solid var(--line-ink);border-radius:var(--r);box-shadow:var(--shadow)}
+details.tool > summary{cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 18px;font:700 1.1rem/1.3 var(--sans);color:var(--navy)}
+details.tool > summary::-webkit-details-marker{display:none}
+details.tool > summary::after{content:"+";font:400 1.6rem/1 var(--serif);color:var(--gold-ink)}
+details.tool[open] > summary::after{content:"–"}
+details.tool > summary small{display:block;font:400 .92rem/1.4 var(--sans);color:var(--ink-soft)}
+details.tool .inner{padding:0 18px 18px}
+details.tool ol,details.tool ul{margin:0;padding-left:1.3em}
+details.tool li{margin:8px 0}
+details.tool li::marker{color:var(--gold-ink);font-weight:700}
+details.tool .fine{margin-top:10px}
+
+/* table */
+.table-wrap{margin-top:16px;overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:var(--r);border:1px solid var(--line-ink);box-shadow:var(--shadow);background:var(--white)}
+table{border-collapse:collapse;width:100%;font-size:16px}
+th,td{padding:12px 14px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line-ink)}
+thead th{background:var(--navy);color:var(--gold);font-weight:700}
+tbody th{color:var(--navy);background:rgba(212,168,83,.10)}
+@media (max-width:480px){table{font-size:15px} th,td{padding:10px 8px}}
+tr:last-child th,tr:last-child td{border-bottom:0}
+.fine{margin-top:10px;font-size:15px;color:var(--ink-soft)}
+
+/* checklist */
+.checks{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:10px}
+.checks label{display:flex;gap:14px;align-items:flex-start;background:var(--white);border:1px solid var(--line-ink);border-radius:var(--r);padding:14px 16px;cursor:pointer;box-shadow:var(--shadow)}
+.checks input{width:26px;height:26px;margin:1px 0 0;accent-color:var(--navy);flex:none}
+
+/* footer */
+footer{margin-top:48px;background:var(--navy);color:var(--cream)}
+footer .wrap{padding-top:36px;padding-bottom:36px}
+footer .ask{margin-top:10px;font:400 1.35rem/1.4 var(--serif)}
+footer .ask a{color:var(--gold);overflow-wrap:anywhere}
+footer .small{margin-top:24px;padding-top:16px;border-top:1px solid var(--line);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;font-size:15px;color:var(--slate)}
+footer .small a{color:var(--slate)}
+
+.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%) translateY(20px);background:var(--navy);color:var(--cream);padding:12px 18px;border-radius:10px;font:600 16px/1.2 var(--sans);opacity:0;transition:opacity .2s,transform .2s;pointer-events:none;z-index:10;box-shadow:0 10px 30px rgba(0,0,0,.25);max-width:calc(100vw - 32px);text-align:center}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+@media (min-width:640px){
+  .dd{grid-template-columns:1fr 1fr}
+  .gallery{grid-template-columns:1fr 1fr}
+}
+/* On a phone the jump links stay on one row and scroll sideways, so they don't cover the page. */
+@media (max-width:639px){
+  /* A QR code is no use on the phone you are holding, so the button does the job there. */
+  .mensch{grid-template-columns:1fr}
+  .mensch img{display:none}
+  .jump ul{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-right:24px}
+  .jump ul::-webkit-scrollbar{display:none}
+  .jump a{white-space:nowrap}
+  section,[id]{scroll-margin-top:72px}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.toast{transition:none}}
+@media print{
+  .jump,.actions,.toast,footer .small{display:none!important}
+  body{background:#fff;font-size:10.5pt}
+  .hero{background:#fff;color:var(--navy);border-bottom:2px solid var(--gold)}
+  .hero::before,.hero::after{display:none}
+  .hero .lede,.hero .event{color:var(--ink-soft)}
+  .card,.prompt,.steps > li,.concern,.shot,details.tool,.table-wrap{box-shadow:none;break-inside:avoid}
+  details.tool > .inner{display:block}
+  footer{background:#fff;color:var(--navy);border-top:2px solid var(--gold)}
+  footer .ask a{color:var(--navy)}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">Rabbi Dan Medwin · Tech Rabbi</p>
+    <h1><em>AI 101</em> for Jewish Educators</h1>
+    <p class="lede">Everything from our session, ready on your phone or laptop. Tap <strong>Ask Google</strong> on a question to see an answer right away, with no account needed, or <strong>Copy</strong> to paste it into any assistant.</p>
+    <p class="event">ARJE · Tuesday, January 26, 2027</p>
+  </div>
+</header>
+
+<nav class="jump" aria-label="On this page">
+  <ul>
+    <li><a href="#start">Start</a></li>
+    <li><a href="#practice">Practice</a></li>
+    <li><a href="#tools">Which one?</a></li>
+    <li><a href="#concerns">Eyes open</a></li>
+    <li><a href="#build">Build</a></li>
+    <li><a href="#starters">Starter prompts</a></li>
+    <li><a href="#save">Save and share</a></li>
+    <li><a href="#next">Keep going</a></li>
+  </ul>
+</nav>
+
+<main>
+
+<section id="start">
+  <div class="wrap">
+    <p class="kicker">Step one</p>
+    <h2>Three ways to start</h2>
+    <ol class="steps">
+      <li><div><h3>No account needed</h3><p>Open your web browser and go to <a href="https://google.com/ai"><strong>google.com/ai</strong></a>. Type your question, or tap the microphone and say it.</p>
+        <div class="actions"><a class="btn primary" href="https://google.com/ai" target="_blank" rel="noopener">Open google.com/ai</a></div></div></li>
+      <li><div><h3>On the web</h3><p>Go to <a href="https://chatgpt.com">chatgpt.com</a> or <a href="https://gemini.google.com">gemini.google.com</a> to try them without an account, or <a href="https://claude.ai">claude.ai</a> with a free account. Each works on a phone or a laptop.</p></div></li>
+      <li><div><h3>Get the app</h3><p>Search the App Store or Google Play for ChatGPT, Claude, or Gemini. <strong>Check that the maker is OpenAI, Anthropic, or Google</strong>, because there are copycats.</p></div></li>
+    </ol>
+    <div class="card">
+      <h3>A good ask has four parts</h3>
+      <ul>
+        <li><strong>Who you are.</strong> “I direct a small religious school.”</li>
+        <li><strong>Who it is for.</strong> “For parents of third graders.”</li>
+        <li><strong>What you want back.</strong> “Three sentences, warm, no jargon.”</li>
+        <li><strong>An invitation.</strong> “Ask me any questions you need before you start.”</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="practice">
+  <div class="wrap">
+    <p class="kicker">Your practice lane</p>
+    <h2>Na’aseh v’Nishma: learn by doing</h2>
+    <div class="source">
+      <span class="he" lang="he">נַעֲשֶׂה וְנִשְׁמָע</span>
+      <p class="tl">Na’aseh v’nishma</p>
+      <p class="en">“We will do, and we will understand.”</p>
+      <p class="ref"><a href="https://www.sefaria.org/Exodus.24.7" target="_blank" rel="noopener">Exodus 24:7</a></p>
+    </div>
+    <p class="intro" style="margin-top:16px">At Sinai the doing came first, and the understanding followed. AI is learned the same way. Here are eight short steps to take at your own pace. Every one works at google.com/ai with no account.</p>
+    <ol class="steps" id="lane"></ol>
+  </div>
+</section>
+
+<section id="tools">
+  <div class="wrap">
+    <p class="kicker">Which one?</p>
+    <h2>The one you will actually open</h2>
+    <p class="intro">Everything on this page works in all three, and you can try them all for free.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th></th><th>ChatGPT</th><th>Claude</th><th>Gemini</th></tr></thead>
+        <tbody>
+          <tr><th>Made by</th><td>OpenAI</td><td>Anthropic</td><td>Google</td></tr>
+          <tr><th>Free version</th><td>Yes, with ads</td><td>Yes, no ads</td><td>Yes, no ads so far</td></tr>
+          <tr><th>Account needed?</th><td>No</td><td>Yes</td><td>No on the website</td></tr>
+          <tr><th>Builds a web page?</th><td>Yes, with a preview in the chat</td><td>Yes. It calls them artifacts.</td><td>Yes, in Canvas</td></tr>
+          <tr><th>Best known for</th><td>Most popular, most features</td><td>Clear writing, careful answers</td><td>Android and Google apps</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="fine">As of fall 2026. These change often. Google’s AI Mode (google.com/ai) also builds pages, in its own Canvas.</p>
+    <div class="card">
+      <h3>Why I use Claude</h3>
+      <p>This is my opinion, and you are welcome to a different one.</p>
+      <ul>
+        <li><strong>Its founders left OpenAI.</strong> In 2021, people who were concerned about OpenAI’s approach left to start Anthropic, the company that makes Claude. They wanted a more thoughtful way to develop AI.</li>
+        <li><strong>It said no to the Pentagon.</strong> In 2026, Anthropic refused to let Claude be used for mass surveillance of Americans or for weapons that kill without a human deciding. The government labeled the company a “supply chain risk,” and the fight is still in court.</li>
+      </ul>
+      <p style="margin-top:10px">No AI company has clean hands, this one included. The next section says why.</p>
+    </div>
+  </div>
+</section>
+
+<section id="concerns">
+  <div class="wrap">
+    <p class="kicker">Eyes open</p>
+    <h2>Four concerns, four Jewish values</h2>
+    <p class="intro">People have real worries about AI, and our tradition already has language for them. Each concern below comes with a source, one number, and what it means in practice.</p>
+
+    <article class="concern">
+      <header>
+        <p class="num">Concern 1 of 4</p>
+        <h3>The planet: bal tashchit</h3>
+        <span class="he" lang="he">לֹא־תַשְׁחִית אֶת־עֵצָהּ</span>
+        <p class="tl">Lo tashchit et eitzah</p>
+        <p class="en">“You must not destroy its trees.”</p>
+        <p class="ref"><a href="https://www.sefaria.org/Deuteronomy.20.19" target="_blank" rel="noopener">Deuteronomy 20:19</a></p>
+      </header>
+      <dl>
+        <dt>The concern</dt><dd>AI runs in data centers that use a great deal of electricity and water. Bal tashchit, the ban on needless waste, is part of tikkun olam, our responsibility for the world we share.</dd>
+        <dt>A number</dt><dd>One text prompt is small: about nine seconds of TV and five drops of water, by Google’s count. The total is not small. Data centers are on track to use about twice as much electricity by 2030.</dd>
+        <dt>In practice</dt><dd class="practice">Use it on purpose. A question that helps you teach is worth it. Throwaway images and videos cost far more, and are not.</dd>
+      </dl>
+    </article>
+
+    <article class="concern">
+      <header>
+        <p class="num">Concern 2 of 4</p>
+        <h3>Creators’ work: g’neivat da’at</h3>
+        <span class="he" lang="he">אָסוּר לִגְנוֹב דַּעַת הַבְּרִיּוֹת</span>
+        <p class="tl">Asur lignov da’at hab’riyot</p>
+        <p class="en">“It is forbidden to deceive people,” literally, to steal their minds.</p>
+        <p class="ref"><a href="https://www.sefaria.org/Chullin.94a.5" target="_blank" rel="noopener">BT Chullin 94a</a></p>
+      </header>
+      <dl>
+        <dt>The concern</dt><dd>These systems learned from millions of books, articles, and artworks, mostly without permission, credit, or pay. Pirkei Avot teaches the opposite habit: whoever says a thing in the name of the one who said it brings redemption to the world (<a href="https://www.sefaria.org/Pirkei_Avot.6.6" target="_blank" rel="noopener">Pirkei Avot 6:6</a>).</dd>
+        <dt>A number</dt><dd>$1.5 billion: what Anthropic, the maker of Claude, agreed to pay authors to settle one lawsuit. A court approved it in July 2026. Other suits are still in court.</dd>
+        <dt>In practice</dt><dd class="practice">Say when AI helped. Credit the people whose work you build on. Feed it your own materials, and skip “in the style of” a living artist.</dd>
+      </dl>
+    </article>
+
+    <article class="concern">
+      <header>
+        <p class="num">Concern 3 of 4</p>
+        <h3>Our own thinking: l’fum tza’ara agra</h3>
+        <span class="he" lang="he">לְפוּם צַעֲרָא אַגְרָא</span>
+        <p class="tl">L’fum tza’ara agra</p>
+        <p class="en">“According to the effort is the reward.”</p>
+        <p class="ref"><a href="https://www.sefaria.org/Pirkei_Avot.5.23" target="_blank" rel="noopener">Pirkei Avot 5:23</a></p>
+      </header>
+      <dl>
+        <dt>The concern</dt><dd>Researchers call it cognitive surrender: we let the tool do the thinking, and we do not notice that we did. The Talmud says to believe the person who says, “I worked hard and I found it” (<a href="https://www.sefaria.org/Megillah.6b.3" target="_blank" rel="noopener">Megillah 6b</a>).</dd>
+        <dt>A number</dt><dd>In 2026, Wharton researchers gave 1,372 people reasoning problems with an AI helper. When the AI was wrong, their scores dropped, and their confidence went up anyway.</dd>
+        <dt>In practice</dt><dd class="practice">Think first, then ask. Use AI to check and stretch work you have already begun. Give students tasks where the thinking shows.</dd>
+      </dl>
+    </article>
+
+    <article class="concern">
+      <header>
+        <p class="num">Concern 4 of 4</p>
+        <h3>Each other: al tifrosh min hatzibur</h3>
+        <span class="he" lang="he">אַל תִּפְרֹשׁ מִן הַצִּבּוּר</span>
+        <p class="tl">Al tifrosh min hatzibur</p>
+        <p class="en">“Do not separate yourself from the community.”</p>
+        <p class="ref"><a href="https://www.sefaria.org/Pirkei_Avot.2.4" target="_blank" rel="noopener">Hillel, Pirkei Avot 2:4</a></p>
+      </header>
+      <dl>
+        <dt>The concern</dt><dd>Chatbots as friends. A companion that always agrees, is never busy, and asks nothing of you.</dd>
+        <dt>A number</dt><dd>72% of U.S. teens have used an AI companion. Nearly a third say those conversations are as satisfying as talking with real friends, or more (Common Sense Media, 2025).</dd>
+        <dt>In practice</dt><dd class="practice">AI can help you get ready for a hard conversation with a person. It cannot be the person. Ask your students who they talk to.</dd>
+      </dl>
+    </article>
+
+    <div class="card dark">
+      <h3>Take this conversation back to your faculty</h3>
+      <p>A student or a parent raises one of these concerns with you. How do you respond? Pick one concern, give each person two minutes, and then switch.</p>
+    </div>
+
+    <div class="card wash mensch" id="digital-mensches">
+      <img src="img/qr-digital-mensches.svg" width="132" height="132" alt="QR code for techrabbi.org/digital-mensches">
+      <div>
+        <p class="kicker">Go deeper with your teens</p>
+        <h3>Digital Mensches</h3>
+        <p>Ten guidelines for ethical online behavior, rooted in Jewish values and shaped by teens. The site has five programs ready to run, with handouts, posters, and scenario cards, and all of it is free. It is a project I guide at URJ 6 Points Sci-Tech Academy.</p>
+        <div class="actions"><a class="btn primary" href="https://techrabbi.org/digital-mensches/" target="_blank" rel="noopener">Open Digital Mensches</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="build">
+  <div class="wrap">
+    <p class="kicker">Build something</p>
+    <h2>Mini-apps for your classroom and your team</h2>
+    <p class="intro">You describe what you want in plain words. The AI writes the code. You get a web page: one file that opens in any browser, with nothing to install and no login for your students. People call this “vibe coding.”</p>
+
+    <h2 class="sub" id="examples">Five I made for my own school</h2>
+    <p class="intro">I built each one with Claude, from a description like the starter prompts below.</p>
+    <div class="gallery">
+      <div class="shot"><img src="img/why-pray.jpg" width="960" height="600" loading="lazy" alt="Nine colorful flip cards under the title Why Do We Pray?"><div class="body"><h3>Why Do We Pray?</h3><p>Nine flip cards for middle school t’filah. Students see a clue, guess, and tap to flip.</p><div class="actions"><a class="btn" href="https://techrabbi.org/why-pray/" target="_blank" rel="noopener">Open it</a></div></div></div>
+      <div class="shot"><img src="img/jewish-special.jpg" width="960" height="600" loading="lazy" alt="Nine flip cards with simple icons under the title What Is Special About Being Jewish?"><div class="body"><h3>What Is Special About Being Jewish?</h3><p>The same idea rebuilt for first graders, with bigger type and simpler words.</p><div class="actions"><a class="btn" href="https://techrabbi.org/jewish-special/" target="_blank" rel="noopener">Open it</a></div></div></div>
+      <div class="shot"><img src="img/jewish-journeys.jpg" width="960" height="600" loading="lazy" alt="A world map with a timeline of Jewish migrations and a panel about the exile to Babylon"><div class="body"><h3>Jewish Journeys</h3><p>A map and timeline of Jewish migration. Tap a stop to follow the arrows and read why people moved.</p><div class="actions"><a class="btn" href="examples/jewish-journeys.html" target="_blank" rel="noopener">Open it</a></div></div></div>
+      <div class="shot"><img src="img/israel-cities.jpg" width="960" height="600" loading="lazy" alt="A map of Israel with twenty labeled cities and a close-up of the Tel Aviv area"><div class="body"><h3>Israel Cities Map</h3><p>The twenty cities from a word search my class had already done. Tap a city to learn about it.</p><div class="actions"><a class="btn" href="examples/israel-cities.html" target="_blank" rel="noopener">Open it</a></div></div></div>
+      <div class="shot"><img src="img/davis-mission.jpg" width="960" height="600" loading="lazy" alt="A plan for a faculty meeting tool with four timed steps and four phone screens"><div class="body"><h3>What Makes Davis, Davis?</h3><p>A one-hour faculty meeting on our mission statement, run from one phone per group, with timed steps and a card sort. The live version needs a school sign-in, so this one is a picture.</p></div></div>
+    </div>
+    <p class="fine">I checked every fact, date, and map location in these myself. The first maps the AI drew had cities in the wrong places.</p>
+
+    <h2 class="sub" id="recipe">The recipe: five parts of a build prompt</h2>
+    <ol class="steps">
+      <li><div><h3>What it is, and who it is for</h3><p>“A single-page web app for my fifth grade class about the four mitzvot of Purim.”</p></div></li>
+      <li><div><h3>What goes in it</h3><p>Paste your own content: your word list, your mission statement, your dates. If the AI drafts the content, check every fact.</p></div></li>
+      <li><div><h3>How it works</h3><p>“Each card flips when a student taps it.” Tap, flip, match, sort, time.</p></div></li>
+      <li><div><h3>How it looks</h3><p>“Colorful, with large type for a smartboard and a phone.”</p></div></li>
+      <li><div><h3>The magic words</h3><p><strong>“Put everything in one HTML file that works offline.”</strong> That phrase gets you a file you can save and keep.</p></div></li>
+    </ol>
+
+    <h2 class="sub" id="starters">Starter prompts</h2>
+    <p class="intro">Tap Copy, paste the prompt into Claude, Gemini, or Google’s AI Mode, and change the words in <span style="color:var(--gold-ink);font-weight:600">[brackets]</span> to make it yours.</p>
+    <div id="starter-list"></div>
+
+    <h2 class="sub" id="revise">Then talk to it</h2>
+    <p class="intro">Nobody gets it right in one prompt. Expect three or four rounds. You do not need to read the code. You need to say what you see. Tap one to copy it.</p>
+    <div class="chips" id="revisions"></div>
+
+    <h2 class="sub" id="where">Where to build it</h2>
+    <p class="intro">The buttons differ in each tool, and they move. These steps were right in November 2026.</p>
+    <details class="tool" open>
+      <summary><span>Claude <small>claude.ai, with a free account</small></span></summary>
+      <div class="inner">
+        <ol>
+          <li>Sign in at <a href="https://claude.ai" target="_blank" rel="noopener">claude.ai</a>.</li>
+          <li>The first time, open <strong>Settings</strong>, then <strong>Capabilities</strong>, and turn on <strong>Create and edit files</strong>.</li>
+          <li>Paste a starter prompt. Claude builds the page and opens it beside the chat.</li>
+          <li>Ask for changes in plain words.</li>
+          <li>Download the file from the controls on the page panel. If you cannot find them, ask: “Give me this as an HTML file I can download.”</li>
+        </ol>
+        <p class="fine">On the free plan, plan to share the file. Sharing by link may need a paid plan.</p>
+      </div>
+    </details>
+    <details class="tool">
+      <summary><span>Gemini <small>gemini.google.com, with a personal Google account</small></span></summary>
+      <div class="inner">
+        <ol>
+          <li>Go to <a href="https://gemini.google.com" target="_blank" rel="noopener">gemini.google.com</a> on a laptop and sign in.</li>
+          <li>Under the message box, choose <strong>Canvas</strong>.</li>
+          <li>Paste a starter prompt. Your page appears in the Canvas panel, where you can switch between the code and a preview.</li>
+          <li>Ask for changes in plain words.</li>
+          <li>For a link, choose <strong>Share &amp; export</strong>, then <strong>Share</strong>. To keep the file, follow “Any assistant” below.</li>
+        </ol>
+      </div>
+    </details>
+    <details class="tool">
+      <summary><span>Google AI Mode <small>google.com/ai, with a personal Google account</small></span></summary>
+      <div class="inner">
+        <ol>
+          <li>Go to <a href="https://google.com/ai" target="_blank" rel="noopener">google.com/ai</a> and sign in. A work or school Google account may not offer this.</li>
+          <li>Tap the <strong>plus sign (+)</strong> in the question box and choose <strong>Canvas</strong>.</li>
+          <li>Paste a starter prompt. Try the page in the panel.</li>
+          <li>Ask for changes in plain words.</li>
+          <li>Use the <strong>Share</strong> button at the top of the Canvas for a link. To keep the file, follow “Any assistant” below.</li>
+        </ol>
+      </div>
+    </details>
+    <details class="tool">
+      <summary><span>Any assistant <small>the method that always works</small></span></summary>
+      <div class="inner">
+        <ol>
+          <li>Ask: “Give me the complete code as one HTML file.”</li>
+          <li>Copy the code.</li>
+          <li>Paste it into a plain-text editor. On Windows, use Notepad. On a Mac, use TextEdit and choose <strong>Format</strong>, then <strong>Make Plain Text</strong>.</li>
+          <li>Save it with a name that ends in <strong>.html</strong>, such as purim-cards.html.</li>
+          <li>Double-click the file. It opens in your browser.</li>
+        </ol>
+      </div>
+    </details>
+
+    <h2 class="sub" id="save">Save it, share it, come back to it</h2>
+    <ol class="steps">
+      <li><div><h3>Save</h3><p>Download the file. Its name ends in .html. Double-click it and it opens in your browser, even with no internet.</p></div></li>
+      <li><div><h3>Share</h3><p>It is a file, so anything you do with a file works. Email it, or put it in a shared drive. Whoever runs your website can post it. In Google Sites, choose Insert, then Embed, then Embed code, and paste the code.</p></div></li>
+      <li><div><h3>Come back</h3><p>Reopen the same chat and keep going. Or start a new chat, attach your .html file, and say what to change.</p>
+        <div class="prompt"><p class="tag">Say this</p><p class="q">Here is my page. Change [what you want changed]. Give me the complete updated file.</p>
+          <div class="actions"><button class="btn primary" type="button" data-copy="Here is my page. Change [what you want changed]. Give me the complete updated file.">Copy</button></div></div></div></li>
+    </ol>
+
+    <h2 class="sub" id="check">Before it reaches a student</h2>
+    <div class="dd">
+      <div class="card do"><h3>CHECK</h3><ul>
+        <li>Every fact, date, and place, against a source you trust</li>
+        <li>All the Hebrew: the spelling, the vowels, and that it runs right to left</li>
+        <li>Whose Judaism it shows. Ask for a Reform Jewish perspective, then check that you got one.</li>
+        <li>That no student names or personal details are in it</li>
+        <li>That it works on the device your learners will use</li>
+      </ul></div>
+      <div class="card dont"><h3>ONE FILE CAN’T</h3><ul>
+        <li>Remember what students typed after the page closes</li>
+        <li>Collect answers from a whole class in one place</li>
+        <li>Sign people in</li>
+      </ul><p style="margin:0;padding:0 18px 16px;font-size:.95rem">Those need a server. They are possible, and they are a topic for another day.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="next">
+  <div class="wrap">
+    <p class="kicker">Keep going</p>
+    <h2>What stays with us</h2>
+    <div class="source">
+      <span class="he" lang="he">כׇּל־הַדָּבָר הַגָּדֹל יָבִיאוּ אֵלֶיךָ וְכׇל־הַדָּבָר הַקָּטֹן יִשְׁפְּטוּ־הֵם</span>
+      <p class="tl">Kol hadavar hagadol yavi’u eilecha, v’chol hadavar hakaton yishp’tu heim.</p>
+      <p class="en">“Have them bring every major dispute to you, but let them decide every minor dispute themselves.”</p>
+      <p class="ref"><a href="https://www.sefaria.org/Exodus.18.22" target="_blank" rel="noopener">Exodus 18:22</a></p>
+    </div>
+    <p class="intro" style="margin-top:16px">Our session fell in the week of Parashat Yitro. Moses is judging every case alone, and Yitro tells him: “You cannot do it alone.” His fix is to hand off the small matters and keep the great ones. AI can take small matters: a first draft, a set of flip cards, a rotation grid. Knowing our students, deciding what is true, and being present stay with us.</p>
+
+    <h2 class="sub">Try one thing this week</h2>
+    <ul class="checks" id="checks">
+      <li><label><input type="checkbox" data-k="ask"> Ask an assistant a real question from my week, and follow up twice</label></li>
+      <li><label><input type="checkbox" data-k="wrong"> Catch it being wrong about something I know well</label></li>
+      <li><label><input type="checkbox" data-k="build"> Build one mini-app and try it with learners</label></li>
+      <li><label><input type="checkbox" data-k="talk"> Talk with a colleague about one of the four concerns</label></li>
+      <li><label><input type="checkbox" data-k="human"> Name one thing I will keep in human hands</label></li>
+    </ul>
+
+    <div class="card" id="made" style="margin-top:28px">
+      <h3>How this page was made</h3>
+      <p>I built this page, the session slides, and the five examples with Claude, an AI assistant made by Anthropic. I set the direction and made the choices, and I am responsible for what is here. If you find a mistake, it is mine, and I would like to hear about it.</p>
+    </div>
+
+    <details class="tool">
+      <summary><span>Sources <small>for the facts on this page</small></span></summary>
+      <div class="inner">
+        <ul>
+          <li><strong>Jewish texts.</strong> Hebrew from <a href="https://www.sefaria.org" target="_blank" rel="noopener">Sefaria</a>. Tanakh translations are from the Revised JPS (2023). Translations of rabbinic texts are my own, adapted.</li>
+          <li><strong>Energy and water.</strong> Google’s August 2025 report on Gemini, <a href="https://www.axios.com/2025/08/21/google-gemini-apps-energy-use-costs" target="_blank" rel="noopener">as reported by Axios</a>. International Energy Agency, <a href="https://www.iea.org/reports/energy-and-ai" target="_blank" rel="noopener">Energy and AI</a>.</li>
+          <li><strong>Copyright.</strong> Bartz v. Anthropic. <a href="https://authorsguild.org/news/court-grants-final-approval-anthropic-copyright-settlement/" target="_blank" rel="noopener">The Authors Guild on the final approval</a>, July 2026.</li>
+          <li><strong>Cognitive surrender.</strong> Steven Shaw and Gideon Nave, <a href="https://papers.ssrn.com/abstract=6097646" target="_blank" rel="noopener">“Thinking—Fast, Slow, and Artificial,”</a> Wharton working paper, January 2026.</li>
+          <li><strong>AI companions.</strong> Common Sense Media, <a href="https://www.commonsensemedia.org/press-releases/nearly-3-in-4-teens-have-used-ai-companions-new-national-survey-finds" target="_blank" rel="noopener">Talk, Trust, and Trade-Offs</a>, July 2025.</li>
+          <li><strong>Anthropic and the Pentagon.</strong> <a href="https://www.npr.org/2026/08/28/nx-s1-5947951/judge-says-the-pentagon-cant-designate-ai-company-anthropic-a-supply-chain-risk" target="_blank" rel="noopener">NPR, August 2026</a>, and <a href="https://www.cnbc.com/2026/09/25/pentagon-anthropic-ai-risk-appeals-court.html" target="_blank" rel="noopener">CNBC, September 2026</a>. The case is ongoing.</li>
+          <li><strong>The tools.</strong> Help pages for <a href="https://support.claude.com/en/articles/9487310-what-are-artifacts-and-how-do-i-use-them" target="_blank" rel="noopener">Claude artifacts</a>, <a href="https://support.google.com/gemini/answer/16047321" target="_blank" rel="noopener">Gemini Canvas</a>, and <a href="https://support.google.com/websearch/answer/16562967" target="_blank" rel="noopener">Canvas in Google’s AI Mode</a>.</li>
+        </ul>
+      </div>
+    </details>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p class="eyebrow">Rabbi Dan Medwin</p>
+    <p class="ask">Tell me what you build, and tell me about the conversations. I would love to hear from you at <a class="mail" href="#"><span class="addr">my email</span></a>.</p>
+    <div class="small"><span>&copy; 2027 Tech Rabbi · Rabbi Dan Medwin · <a href="#made">Made with help from AI</a></span><a href="/">techrabbi.org</a></div>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+/* The practice lane. "q" is a prompt; "fill" marks one with [brackets] to change, which gets no one-tap link. */
+const LANE = [
+  { h: 'Ask for something you need this week',
+    p: 'Start with a real question from your own work.',
+    prompts: [{ q: 'I teach fifth grade at a Reform religious school. Give me three ways to open a lesson on Purim that take five minutes or less.' }],
+    notice: 'It answers in seconds, and it reads like a first draft. Change the grade and the topic so it fits you.' },
+  { h: 'Follow up',
+    p: 'Stay in the same conversation and send one of these.',
+    chips: ['Make the second one work with no supplies.', 'Shorter.', 'Which would you pick for a restless class, and why?', 'Give me three more.'],
+    notice: 'The second and third answers are usually better than the first. The conversation is the skill.' },
+  { h: 'Say who you are and what you want back',
+    p: 'Name the audience, the length, and the tone.',
+    prompts: [{ q: 'I direct a small Reform religious school. Write a short note to parents inviting them to our Purim carnival on [date and time]. Three sentences, warm, no exclamation points.', fill: true }],
+    notice: 'The more you say up front, the less you fix afterward.' },
+  { h: 'Let it interview you',
+    p: 'Ask it to ask you questions before it answers.',
+    prompts: [{ q: 'I want to plan a family education program about Shabbat for my congregation. Before you suggest anything, ask me five questions, one at a time.' }],
+    notice: 'It does better work once it knows your setting.' },
+  { h: 'Catch it being wrong',
+    p: 'Ask for sources, then look each one up on sefaria.org. Or ask about something you know very well.',
+    prompts: [
+      { q: 'Give me three quotes from the Talmud about teaching children, with the exact source for each.' },
+      { q: 'Tell me the history of [your congregation, or your town’s Jewish community]. Include your sources.', fill: true }],
+    notice: 'It can sound sure and still be wrong, and it sometimes invents quotes and sources. Checking is the most important habit on this page.' },
+  { h: 'Ask it to disagree with you',
+    p: 'Give it a plan of yours and ask what is weak.',
+    prompts: [{ q: 'Here is my plan: [paste a lesson plan or an idea]. What is weak about it? Be direct, and then suggest two fixes.', fill: true }],
+    notice: 'It tends to agree with you unless you ask it not to.' },
+  { h: 'Ask for a Reform Jewish lens',
+    p: 'Name the perspective you want. Then ask how another one differs.',
+    prompts: [{ q: 'Explain why we light candles on Shabbat, from a Reform Jewish perspective, for a fourth grader.' }],
+    chips: ['How would an Orthodox teacher answer differently?'],
+    notice: 'Its default Jewish voice may not be yours. Ask for the one you want, then check that you got it.' },
+  { h: 'Build something',
+    p: 'You are ready. Take the first starter prompt and make a set of flip cards.',
+    link: { href: '#starters', label: 'Go to the starter prompts' } }
+];
+
+/* Starter prompts for mini-apps. Each follows the five-part recipe. */
+const STARTERS = [
+  { tag: 'Flip cards', why: 'Good first build. This is the one from the session.',
+    q: 'Build a single-page web app for my [fifth grade] religious school class about [the four mitzvot of Purim]. Show [four] large cards in a grid. Each card has a simple icon and a short clue on the front. When a student taps a card, it flips to show the answer: the Hebrew term with vowels, a transliteration, and one sentence a [ten-year-old] can read. Make it colorful, with large type that works on a classroom smartboard and on a phone. Add a “Flip all back” button. Put everything in one HTML file that works offline.' },
+  { tag: 'Matching game', why: 'Use your own word list, so there is less to check.',
+    q: 'Build a single-page matching game for [third graders] learning [Hebrew holiday words]. Show the Hebrew words, with vowels, in one column and their English meanings, shuffled, in another. A student taps a word and then its match. A correct pair turns green and stays. A wrong pair shakes and resets. Show how many matches are left and add a “Play again” button that reshuffles. Use these pairs: [paste your word list]. Large type, bright colors, works on a smartboard and a phone. Put everything in one HTML file that works offline.' },
+  { tag: 'Timeline', why: 'Give it the facts. Tell it not to add any.',
+    q: 'Build a single-page interactive timeline of [the history of our congregation]. Use only these events, and do not add any: [paste each date with a one-line description]. Show the events along a horizontal line. When I tap one, show its date, a title, and two sentences below. Add Back and Next buttons so I can walk a class through it in order. Calm colors, large type for a projector. Put everything in one HTML file that works offline.' },
+  { tag: 'Meeting facilitator', why: 'For a faculty or board meeting, with timers.',
+    q: 'Build a single-page facilitator tool for a [sixty-minute faculty meeting] about our mission statement. Here is the mission: [paste it]. Break it into its key phrases and show each one as a card. Run the meeting in four steps, each with its own instructions on screen and a large countdown timer I can start, pause, and reset: (1) in small groups, choose the six phrases that matter most [15 minutes]; (2) narrow them to three [10 minutes]; (3) each group answers “Where would a visitor see this in our school?” [15 minutes]; (4) share with everyone [15 minutes]. Always show which step we are on. Large type for a projector. Put everything in one HTML file that works offline.' },
+  { tag: 'Rotation schedule', why: 'For a carnival, a family day, or a retreat.',
+    q: 'Build a single-page rotation schedule maker for [a Purim carnival]. I type in the names of the groups, the names of the stations, the start time, and the minutes for each rotation. The page builds a grid that shows where every group is in every time slot, so that each group visits each station once and no two groups are at the same station at the same time. Let me edit any name and see the grid update. Add a Print button with a clean layout for printing. Put everything in one HTML file that works offline.' },
+  { tag: 'Map', why: 'Check every location against a real map.',
+    q: 'Build a single-page map of Israel for [fourth graders] with these cities: [list six to ten cities]. Draw a simple outline map with a dot for each city. When a student taps a dot, show the city’s name in English and in Hebrew with vowels, and two sentences about it. Add a “Quiz me” button that names a city and asks the student to tap it. Large type, works on a smartboard. Put everything in one HTML file that works offline. Then tell me which facts and locations I should double-check.' },
+  { tag: 'Question spinner', why: 'Bring your own questions, or ask it to draft ten and choose the best.',
+    q: 'Build a single-page “question spinner” for [seventh grade] discussions about [this week’s Torah portion]. A large button picks one question at random from my list and shows it in large type, with a two-minute timer for talking with a partner. Do not repeat a question until all of them have been used. Here are my questions: [paste your questions]. Put everything in one HTML file that works offline.' }
+];
+
+const REVISIONS = [
+  'Make the text larger so the back row can read it.',
+  'Add Hebrew with vowels next to each English term.',
+  'The cards are too small on my phone. Fix the layout for small screens.',
+  'Change the colors to [our school’s blue and gold].',
+  'When I tap [the third card], nothing happens. Fix it.',
+  'Which facts on this page should I double-check?',
+  'Give me the complete updated file.'
+];
+
+/* Opens Google AI Mode with the question already asked. No account needed.
+   udm=50 is the AI Mode tab; Google doesn't document it, so Copy stays as the fallback. */
+const askGoogle = q => 'https://www.google.com/search?udm=50&q=' + encodeURIComponent(q);
+
+const toast = document.getElementById('toast');
+let toastTimer;
+function say(msg){ toast.textContent = msg; toast.classList.add('show'); clearTimeout(toastTimer); toastTimer = setTimeout(() => toast.classList.remove('show'), 1800); }
+async function copy(text, btn){
+  let ok = false;
+  try { await navigator.clipboard.writeText(text); ok = true; }
+  catch (e) {
+    const ta = document.createElement('textarea'); ta.value = text; ta.setAttribute('readonly', ''); ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.select();
+    try { ok = document.execCommand('copy'); } catch (e2) {}
+    ta.remove();
+  }
+  if (ok) { say('Copied. Now paste it into your assistant.'); if (btn) btn.classList.add('done'); }
+  else say('Press and hold the text to copy it.');
+}
+const el = (tag, cls, text) => { const n = document.createElement(tag); if (cls) n.className = cls; if (text != null) n.textContent = text; return n; };
+
+/* Show [brackets] in gold so people see what to change. */
+function fillText(node, text){
+  text.split(/(\[[^\]]+\])/).forEach(part => {
+    if (/^\[.*\]$/.test(part)) node.appendChild(el('span', 'fill', part));
+    else node.appendChild(document.createTextNode(part));
+  });
+}
+function promptBox(p, tagText, long){
+  const box = el('div', 'prompt');
+  box.appendChild(el('p', 'tag', tagText));
+  const q = el('p', 'q' + (long ? ' long' : '')); fillText(q, p.q); box.appendChild(q);
+  if (p.why) box.appendChild(el('p', 'why', p.why));
+  const actions = el('div', 'actions');
+  const b = el('button', 'btn primary', 'Copy'); b.type = 'button';
+  b.addEventListener('click', () => copy(p.q, b)); actions.appendChild(b);
+  if (!long && !p.fill) { const a = el('a', 'btn', 'Ask Google'); a.href = askGoogle(p.q); a.target = '_blank'; a.rel = 'noopener'; actions.appendChild(a); }
+  box.appendChild(actions);
+  return box;
+}
+function chipRow(list){
+  const row = el('div', 'chips');
+  list.forEach(f => { const c = el('button', 'chip'); c.type = 'button'; c.appendChild(document.createTextNode('“')); fillText(c, f); c.appendChild(document.createTextNode('”')); c.addEventListener('click', () => copy(f, c)); row.appendChild(c); });
+  return row;
+}
+
+(function render(){
+  const lane = document.getElementById('lane');
+  LANE.forEach(s => {
+    const li = el('li'), d = el('div');
+    d.appendChild(el('h3', null, s.h));
+    d.appendChild(el('p', null, s.p));
+    (s.prompts || []).forEach(p => d.appendChild(promptBox(p, p.fill ? 'Make it yours' : 'Try this')));
+    if (s.chips) d.appendChild(chipRow(s.chips));
+    if (s.link) { const a = el('a', 'btn primary', s.link.label); a.href = s.link.href; const w = el('div', 'actions'); w.appendChild(a); d.appendChild(w); }
+    if (s.notice) { const n = el('p', 'notice'); n.appendChild(el('b', null, 'Notice: ')); n.appendChild(document.createTextNode(s.notice)); d.appendChild(n); }
+    li.appendChild(d); lane.appendChild(li);
+  });
+  const starters = document.getElementById('starter-list');
+  STARTERS.forEach(p => starters.appendChild(promptBox(p, p.tag, true)));
+  document.getElementById('revisions').replaceWith(Object.assign(chipRow(REVISIONS), { id: 'revisions' }));
+  document.querySelectorAll('button[data-copy]').forEach(b => b.addEventListener('click', () => copy(b.dataset.copy, b)));
+})();
+
+/* This week's checklist remembers your ticks on this device only. */
+(function(){
+  const KEY = 'arje-ai101-week';
+  let saved = {};
+  try { saved = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch (e) {}
+  document.querySelectorAll('#checks input').forEach(cb => {
+    cb.checked = !!saved[cb.dataset.k];
+    cb.addEventListener('change', () => { saved[cb.dataset.k] = cb.checked; try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch (e) {} });
+  });
+})();
+
+// The address is assembled here rather than written into the page, so scrapers
+// reading the HTML don't pick it up. Same address and approach as the home page.
+(function () {
+  var user = [114, 97, 98, 98, 105, 46, 100, 97, 110];
+  var host = [109, 101, 100, 119, 46, 105, 110];
+  var text = function (codes) { return codes.map(function (c) { return String.fromCharCode(c); }).join(''); };
+  var addr = text(user) + String.fromCharCode(64) + text(host);
+  document.querySelectorAll('a.mail').forEach(function (link) {
+    link.href = 'mai' + 'lt' + 'o:' + addr + '?subject=AI%20101%20for%20Jewish%20Educators';
+    link.querySelector('.addr').textContent = addr;
+  });
+})();
+</script>
+</body>
+</html>
