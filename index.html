@@ -50,14 +50,19 @@ img{max-width:100%;height:auto;display:block}
 .hero .lede{margin-top:16px;font-size:1.12rem;line-height:1.6;color:var(--cream);max-width:34em}
 .hero .event{margin-top:22px;padding-top:16px;border-top:1px solid var(--line);font:400 15px/1.5 var(--sans);color:var(--slate)}
 
-/* jump links */
+/* Section bar: the page's section names, set as plain text. It stays at the top,
+   and the section you are reading gets a gold underline (the script at the bottom moves it). */
 .jump{position:sticky;top:0;z-index:5;background:rgba(245,240,232,.96);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border-bottom:1px solid var(--line-ink)}
-.jump ul{list-style:none;margin:0 auto;padding:10px 12px;max-width:760px;display:flex;flex-wrap:wrap;gap:6px}
-.jump a{display:inline-block;padding:7px 12px;border-radius:999px;background:var(--white);border:1px solid var(--line-ink);font:500 15px/1.2 var(--sans);text-decoration:none;color:var(--navy)}
+.jump ul{list-style:none;margin:0 auto;padding:0 16px;max-width:760px;display:flex;gap:0 18px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.jump ul::-webkit-scrollbar{display:none}
+.jump a{display:block;padding:15px 0 11px;border-bottom:3px solid transparent;font:600 15px/1.2 var(--sans);white-space:nowrap;text-decoration:none;color:var(--ink-soft);transition:color .15s,border-color .15s}
+.jump a:hover{color:var(--navy)}
+.jump a[aria-current]{color:var(--navy);border-bottom-color:var(--gold-ink)}
+.jump a:focus-visible{outline-offset:-3px}
 
 /* sections */
-section{padding:40px 0 8px;scroll-margin-top:110px}
-[id]{scroll-margin-top:110px}
+section{padding:40px 0 8px;scroll-margin-top:68px}
+[id]{scroll-margin-top:68px}
 .kicker{font:500 13px/1.4 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--gold-ink)}
 section h2{margin-top:8px;font:700 clamp(1.7rem,6vw,2.2rem)/1.15 var(--serif);color:var(--navy);text-wrap:balance}
 h2.sub{margin-top:40px}
@@ -193,17 +198,16 @@ footer .small a{color:var(--slate)}
   .dd{grid-template-columns:1fr 1fr}
   .gallery{grid-template-columns:1fr 1fr}
 }
-/* On a phone the jump links stay on one row and scroll sideways, so they don't cover the page. */
 @media (max-width:639px){
   /* A QR code is no use on the phone you are holding, so the button does the job there. */
   .mensch{grid-template-columns:1fr}
   .mensch img{display:none}
-  .jump ul{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-right:24px}
-  .jump ul::-webkit-scrollbar{display:none}
-  .jump a{white-space:nowrap}
-  section,[id]{scroll-margin-top:72px}
 }
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.toast{transition:none}}
+/* When the section names do not fit on one row, the row scrolls sideways and fades at its edges to show there is more. */
+@media (max-width:759px){
+  .jump ul{padding-right:36px;-webkit-mask-image:linear-gradient(to right,transparent,#000 16px,#000 calc(100% - 36px),transparent);mask-image:linear-gradient(to right,transparent,#000 16px,#000 calc(100% - 36px),transparent)}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.toast{transition:none}.jump a{transition:none}}
 @media print{
   .jump,.actions,.toast,footer .small{display:none!important}
   body{background:#fff;font-size:10.5pt}
@@ -458,7 +462,7 @@ footer .small a{color:var(--slate)}
       <div class="shot"><img src="img/why-pray.jpg" width="960" height="600" loading="lazy" alt="Nine colorful flip cards under the title Why Do We Pray?"><div class="body"><h3>Why Do We Pray?</h3><p>Nine flip cards for middle school t’filah. Students see a clue, guess, and tap to flip.</p><div class="actions"><a class="btn" href="https://techrabbi.org/why-pray/" target="_blank" rel="noopener">Open it</a></div></div></div>
       <div class="shot"><img src="img/jewish-special.jpg" width="960" height="600" loading="lazy" alt="Nine flip cards with simple icons under the title What Is Special About Being Jewish?"><div class="body"><h3>What Is Special About Being Jewish?</h3><p>Nine flip cards for first graders, from Shabbat to asking questions.</p><div class="actions"><a class="btn" href="https://techrabbi.org/jewish-special/" target="_blank" rel="noopener">Open it</a></div></div></div>
       <div class="shot"><img src="img/jewish-journeys.jpg" width="960" height="600" loading="lazy" alt="A world map with a timeline of Jewish migrations and a panel about the exile to Babylon"><div class="body"><h3>Jewish Journeys</h3><p>A map and timeline of Jewish migration. Tap a stop to follow the arrows and read why people moved.</p><div class="actions"><a class="btn" href="examples/jewish-journeys.html" target="_blank" rel="noopener">Open it</a></div></div></div>
-      <div class="shot"><img src="img/israel-cities.jpg" width="960" height="600" loading="lazy" alt="A map of Israel with nineteen labeled cities and a close-up of the Tel Aviv area"><div class="body"><h3>Israel Cities Map</h3><p>The cities from our word search. Tap a city to learn about it.</p><div class="actions"><a class="btn" href="examples/israel-cities.html" target="_blank" rel="noopener">Open it</a></div></div></div>
+      <div class="shot"><img src="img/israel-cities.jpg" width="960" height="600" loading="lazy" alt="A map of Israel with twenty labeled cities and a close-up of the Tel Aviv area"><div class="body"><h3>Israel Cities Map</h3><p>The twenty cities from our word search. Tap a city to learn about it.</p><div class="actions"><a class="btn" href="examples/israel-cities.html" target="_blank" rel="noopener">Open it</a></div></div></div>
       <div class="shot"><img src="img/davis-mission.jpg" width="960" height="600" loading="lazy" alt="A plan for a faculty meeting tool with four timed steps and four phone screens"><div class="body"><h3>What Makes Davis, Davis?</h3><p>A one-hour faculty meeting on our mission statement, run from one phone per group, with timed steps and a card sort. The live version needs a school sign-in, so this one is a picture.</p></div></div>
     </div>
     <p class="fine">AI can get facts, dates, and map locations wrong and sound sure. <a href="#check">Here is how I handle that.</a></p>
@@ -682,6 +686,62 @@ document.querySelectorAll('a[href]').forEach(a => {
   if (h.startsWith('#') || h.startsWith('mailto:')) return;
   a.target = '_blank'; a.rel = 'noopener';
 });
+
+/* The section bar underlines the section you are reading, and follows as you scroll.
+   A section becomes current when its heading passes a line about a third of the way down the window. */
+(function () {
+  const bar = document.querySelector('.jump'), list = bar && bar.querySelector('ul');
+  if (!list) return;
+  const items = [...list.querySelectorAll('a[href^="#"]')]
+    .map(a => ({ a, el: document.getElementById(a.getAttribute('href').slice(1)) }))
+    .filter(x => x.el);
+  const calm = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let current = null, held = false, timer = 0;
+
+  function mark(item) {
+    if (item === current) return;
+    if (current) current.a.removeAttribute('aria-current');
+    current = item;
+    if (!item) return;
+    item.a.setAttribute('aria-current', 'location');
+    /* On a narrow screen the row scrolls sideways; keep the current name in view. */
+    if (list.scrollWidth > list.clientWidth) {
+      const box = item.a.getBoundingClientRect(), row = list.getBoundingClientRect();
+      const left = list.scrollLeft + (box.left - row.left) - (list.clientWidth - box.width) / 2;
+      list.scrollTo({ left: Math.max(0, left), behavior: calm.matches ? 'auto' : 'smooth' });
+    }
+  }
+  function find() {
+    const floor = bar.getBoundingClientRect().bottom;
+    const line = floor + (window.innerHeight - floor) * 0.3;
+    let hit = null;
+    for (const x of items) if (x.el.getBoundingClientRect().top <= line) hit = x;
+    /* At the very bottom, the last section is current even if it is too short to reach the line. */
+    if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2) hit = items[items.length - 1];
+    mark(hit);
+  }
+  function release() { clearTimeout(timer); held = false; find(); }
+  function onScroll() {
+    if (held) {
+      /* After a tap on a section name, wait for the page to stop moving before following the scroll again. */
+      clearTimeout(timer);
+      timer = setTimeout(release, 200);
+      return;
+    }
+    find();
+  }
+  items.forEach(x => x.a.addEventListener('click', () => {
+    mark(x);
+    held = true;
+    clearTimeout(timer);
+    timer = setTimeout(release, 500);
+  }));
+  window.addEventListener('scrollend', () => { if (held) release(); });
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  window.addEventListener('load', find);
+  find();
+})();
 
 /* This week's checklist remembers your ticks on this device only. */
 (function(){
