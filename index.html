@@ -419,12 +419,12 @@ footer .small a{color:var(--slate)}
       <div class="shot"><img src="img/israel-cities.jpg" width="960" height="600" loading="lazy" alt="A map of Israel with twenty labeled cities and a close-up of the Tel Aviv area"><div class="body"><h3>Israel Cities Map</h3><p>The twenty cities from our word search. Tap a city to learn about it.</p><div class="actions"><a class="btn" href="examples/israel-cities.html" target="_blank" rel="noopener">Open it</a></div></div></div>
       <div class="shot"><img src="img/davis-mission.jpg" width="960" height="600" loading="lazy" alt="A plan for a faculty meeting tool with four timed steps and four phone screens"><div class="body"><h3>What Makes Davis, Davis?</h3><p>A one-hour faculty meeting on our mission statement, run from one phone per group, with timed steps and a card sort. The live version needs a school sign-in, so this one is a picture.</p></div></div>
     </div>
-    <p class="fine">Before a page like these reaches learners, check its facts, dates, and map locations. AI can get them wrong and sound sure.</p>
+    <p class="fine">AI can get facts, dates, and map locations wrong and sound sure. <a href="#check">Here is how I handle that.</a></p>
 
     <h2 class="sub" id="recipe">The recipe: five parts of a build prompt</h2>
     <ol class="steps">
       <li><div><h3>What it is, and who it is for</h3><p>“A single-page web app for my fifth grade class about the four mitzvot of Purim.”</p></div></li>
-      <li><div><h3>What goes in it</h3><p>Paste your own content: your word list, your mission statement, your dates. If the AI drafts the content, check every fact.</p></div></li>
+      <li><div><h3>What goes in it</h3><p>Paste your own content when you can: your word list, your mission statement, your dates. Then there is less to check.</p></div></li>
       <li><div><h3>How it works</h3><p>“Each card flips when a student taps it.” Tap, flip, match, sort, time.</p></div></li>
       <li><div><h3>How it looks</h3><p>“Colorful, with large type for a smartboard and a phone.”</p></div></li>
       <li><div><h3>The magic words</h3><p><strong>“Put everything in one HTML file that works offline.”</strong> That phrase gets you a file you can save and keep.</p></div></li>
@@ -499,20 +499,35 @@ footer .small a{color:var(--slate)}
           <div class="actions"><button class="btn primary" type="button" data-copy="Here is my page. Change [what you want changed]. Give me the complete updated file.">Copy</button></div></div></div></li>
     </ol>
 
-    <h2 class="sub" id="check">Before it reaches a student</h2>
-    <div class="dd">
-      <div class="card do"><h3>CHECK</h3><ul>
-        <li>Every fact, date, and place, against a source you trust</li>
-        <li>All the Hebrew: the spelling, the vowels, and that it runs right to left</li>
-        <li>Whose Judaism it shows. Ask for a Reform Jewish perspective, then check that you got one.</li>
-        <li>That no student names or personal details are in it</li>
-        <li>That it works on the device your learners will use</li>
-      </ul></div>
-      <div class="card dont"><h3>ONE FILE CAN’T</h3><ul>
+    <h2 class="sub" id="check">Check what matters most. Own all of it.</h2>
+    <p class="intro">No one can check every fact, date, and vowel in everything AI makes. We are still responsible for what reaches our students. Here is a process you can keep.</p>
+    <div class="source">
+      <span class="he" lang="he">לֹא עָלֶיךָ הַמְּלָאכָה לִגְמֹר וְלֹא אַתָּה בֶן חוֹרִין לִבָּטֵל מִמֶּנָּה</span>
+      <p class="tl">Lo alecha ham’lachah ligmor, v’lo atah ven chorin l’hibateil mimenah.</p>
+      <p class="en">“It is not your duty to finish the work, but neither are you free to neglect it.”</p>
+      <p class="ref"><a href="https://www.sefaria.org/Pirkei_Avot.2.16" target="_blank" rel="noopener">Rabbi Tarfon, Pirkei Avot 2:16</a></p>
+    </div>
+    <ol class="steps">
+      <li><div><h3>Start with your own material</h3><p>Give it your word list, your dates, your text, and tell it to add nothing. Then there is less to check.</p></div></li>
+      <li><div><h3>Call a second witness</h3><p>Torah does not accept one witness: “a case can be valid only on the testimony of two witnesses or more” (<a href="https://www.sefaria.org/Deuteronomy.19.15" target="_blank" rel="noopener">Deuteronomy 19:15</a>). Paste your page into a different AI, from a different company, and ask what is wrong. Google’s AI Mode works well here because it shows its sources.</p>
+        <div class="prompt"><p class="tag">Ask the second AI</p><p class="q long" id="check-prompt"></p>
+          <div class="actions"><button class="btn primary" type="button" id="check-copy">Copy</button></div></div>
+        <p class="notice"><b>Notice: </b>A second AI is a witness, not a judge. It catches some mistakes and misses others, and it will sometimes “find” a mistake that is not one. Where the two disagree is where to look.</p></div></li>
+      <li><div><h3>Bring the great matters to yourself</h3><p>Check these with your own eyes: sacred texts (look them up on <a href="https://www.sefaria.org" target="_blank" rel="noopener">Sefaria</a>), names, the Hebrew you can read, whose Judaism the page shows, and anything the two witnesses disagree on.</p></div></li>
+      <li><div><h3>Stay correctable</h3><p>Say that AI helped. Tell students and colleagues you want to hear about mistakes. One file takes a minute to fix.</p></div></li>
+    </ol>
+    <div class="card wash">
+      <h3>How much checking?</h3>
+      <p>Match it to the stakes. A game for one class period gets the first two steps and a skim. Something that goes home to every family, or stays on your website, gets a knowledgeable person reading all of it. Either way, keep student names and personal details out.</p>
+    </div>
+    <div class="card">
+      <h3>What one file can’t do</h3>
+      <ul>
         <li>Remember what students typed after the page closes</li>
         <li>Collect answers from a whole class in one place</li>
         <li>Sign people in</li>
-      </ul><p style="margin:0;padding:0 18px 16px;font-size:.95rem">Those need a server. They are possible, and they are a topic for another day.</p></div>
+      </ul>
+      <p style="margin-top:10px">Those need a server. They are possible, and they are a topic for another day.</p>
     </div>
   </div>
 </section>
@@ -547,7 +562,7 @@ footer .small a{color:var(--slate)}
       <summary><span>Sources <small>for the facts on this page</small></span></summary>
       <div class="inner">
         <ul>
-          <li><strong>Jewish texts.</strong> Hebrew from <a href="https://www.sefaria.org" target="_blank" rel="noopener">Sefaria</a>. Tanakh translations are from the Revised JPS (2023). Translations of rabbinic texts are my own, adapted.</li>
+          <li><strong>Jewish texts.</strong> Hebrew from <a href="https://www.sefaria.org" target="_blank" rel="noopener">Sefaria</a>. Tanakh translations are from the Revised JPS (2023). Translations of Pirkei Avot and the Talmud are my own, adapted.</li>
           <li><strong>Energy and water.</strong> Google’s August 2025 report on Gemini, <a href="https://www.axios.com/2025/08/21/google-gemini-apps-energy-use-costs" target="_blank" rel="noopener">as reported by Axios</a>. International Energy Agency, <a href="https://www.iea.org/reports/energy-and-ai" target="_blank" rel="noopener">Energy and AI</a>.</li>
           <li><strong>Copyright.</strong> Bartz v. Anthropic. <a href="https://authorsguild.org/news/court-grants-final-approval-anthropic-copyright-settlement/" target="_blank" rel="noopener">The Authors Guild on the final approval</a>, July 2026.</li>
           <li><strong>Cognitive surrender.</strong> Steven Shaw and Gideon Nave, <a href="https://papers.ssrn.com/abstract=6097646" target="_blank" rel="noopener">“Thinking—Fast, Slow, and Artificial,”</a> Wharton working paper, January 2026.</li>
@@ -597,7 +612,8 @@ const LANE = [
     prompts: [
       { q: 'Give me three quotes from the Talmud about teaching children, with the exact source for each.' },
       { q: 'Tell me the history of [your congregation, or your town’s Jewish community]. Include your sources.', fill: true }],
-    notice: 'It can sound sure and still be wrong, and it sometimes invents quotes and sources. Checking is the most important habit on this page.' },
+    chips: ['Check this answer from another AI. What in it is wrong, or impossible to confirm?'],
+    notice: 'It can sound sure and still be wrong, and it sometimes invents quotes and sources. A second assistant, from a different company, is a useful second witness. Paste the first answer in after that line.' },
   { h: 'Ask it to disagree with you',
     p: 'Give it a plan of yours and ask what is weak.',
     prompts: [{ q: 'Here is my plan: [paste a lesson plan or an idea]. What is weak about it? Be direct, and then suggest two fixes.', fill: true }],
@@ -629,6 +645,8 @@ const STARTERS = [
   { tag: 'Question spinner', why: 'Bring your own questions, or ask it to draft ten and choose the best.',
     q: 'Build a single-page “question spinner” for [seventh grade] discussions about [this week’s Torah portion]. A large button picks one question at random from my list and shows it in large type, with a two-minute timer for talking with a partner. Do not repeat a question until all of them have been used. Here are my questions: [paste your questions]. Put everything in one HTML file that works offline.' }
 ];
+
+const CHECK_PROMPT = 'Another AI made the page below for my students. Act as a careful fact-checker. List every fact, date, name, place, and Hebrew word that is wrong or that you cannot confirm, and say why, with a source where you can. Check the Hebrew spelling and vowels. Do not rewrite the page. Then tell me the three things I should still verify myself. [paste the text of your page, or attach the file]';
 
 const REVISIONS = [
   'Make the text larger so the back row can read it.',
@@ -702,6 +720,8 @@ function chipRow(list){
   STARTERS.forEach(p => starters.appendChild(promptBox(p, p.tag, true)));
   document.getElementById('revisions').replaceWith(Object.assign(chipRow(REVISIONS), { id: 'revisions' }));
   document.querySelectorAll('button[data-copy]').forEach(b => b.addEventListener('click', () => copy(b.dataset.copy, b)));
+  fillText(document.getElementById('check-prompt'), CHECK_PROMPT);
+  const cc = document.getElementById('check-copy'); cc.addEventListener('click', () => copy(CHECK_PROMPT, cc));
 })();
 
 /* Every link that leaves this page opens in a new tab, so the page stays open behind it. */
